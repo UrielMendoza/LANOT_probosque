@@ -21,19 +21,17 @@ for line in lines:
         print('Meta: '+fileMeta)
 
         meta = minidom.parse(fileMeta)
-        radioSF_b6 = meta.getElementsByTagName('ps:radiometricScaleFactor')[5].firstChild.data
-        radioSF_b8 = meta.getElementsByTagName('ps:radiometricScaleFactor')[7].firstChild.data
-        refleSF_b6 = meta.getElementsByTagName('ps:reflectanceCoefficient')[5].firstChild.data
-        refleSF_b8 = meta.getElementsByTagName('ps:reflectanceCoefficient')[7].firstChild.data
-
-        print(type(radioSF_b6))
+        radioSF_b6 = float(meta.getElementsByTagName('ps:radiometricScaleFactor')[5].firstChild.data)
+        radioSF_b8 = float(meta.getElementsByTagName('ps:radiometricScaleFactor')[7].firstChild.data)
+        refleSF_b6 = float(meta.getElementsByTagName('ps:reflectanceCoefficient')[5].firstChild.data)
+        refleSF_b8 = float(meta.getElementsByTagName('ps:reflectanceCoefficient')[7].firstChild.data)
 
         ds = rasterio.open(file)
-        band6 = ds.read(6)
-        band8 = ds.read(8)
+        b6 = ds.read(6) * radioSF_b6
+        b8 = ds.read(8) * radioSF_b8
+        ndvi = (b8 - b6) / (b8 + b6)
 
-        print(band6)
-        print(band8)
+        print(ndvi)
         print(ds.width, ds.height)
 
 
