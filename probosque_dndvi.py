@@ -21,8 +21,8 @@ for line in lines:
 
         meta = minidom.parse(fileMeta)
         radioSF_b6 = meta.getElementsByTagName('ps:radiometricScaleFactor')[5].firstChild.data
-        radioSF_b6 = meta.getElementsByTagName('ps:radiometricScaleFactor')[7].firstChild.data
-        refleSF_b8 = meta.getElementsByTagName('ps:reflectanceCoefficient')[5].firstChild.data
+        radioSF_b8 = meta.getElementsByTagName('ps:radiometricScaleFactor')[7].firstChild.data
+        refleSF_b6 = meta.getElementsByTagName('ps:reflectanceCoefficient')[5].firstChild.data
         refleSF_b8 = meta.getElementsByTagName('ps:reflectanceCoefficient')[7].firstChild.data
         print(radioSF_b6)
         print(radioSF_b6)
