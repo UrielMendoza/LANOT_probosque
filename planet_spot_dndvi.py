@@ -5,37 +5,31 @@ import numpy as np
 from xml.dom import minidom
 import os
 
-pathInputPlanet = '/data/output/probosque/planet_ndvi/'
-pathOutput = '/data/output/probosque/planet_ndvi/'
+pathInput = '/data/output/probosque/planet_ndvi/'
+pathOutput = '/data/output/probosque/planet_spot_dndvi/'
+pathInputSPOT = '/data/input/probosque/mosaico_ndvi_2015/ndvi_mosaico_2015.tif'
 
-lines = glob(pathInputPlanet+'*')
+lines = glob(pathInput+'*')
 
 #print(lines)
 
 for line in lines:
-    filesMeta = glob(line+'/'+'*_metadata.xml')
-    files = glob(line+'/'+'*_harmonized.tif')
-    filesMeta.sort()
+    files = glob(line+'/'+'*_ndvi.tif')
     files.sort()
-    for fileMeta,file in zip(filesMeta,files):
+    for file in files:
         print('Porcesando: '+file)
-        print('Meta: '+fileMeta)
-
-        meta = minidom.parse(fileMeta)
-        radioSF_b6 = float(meta.getElementsByTagName('ps:radiometricScaleFactor')[5].firstChild.data)
-        radioSF_b8 = float(meta.getElementsByTagName('ps:radiometricScaleFactor')[7].firstChild.data)
-        refleSF_b6 = float(meta.getElementsByTagName('ps:reflectanceCoefficient')[5].firstChild.data)
-        refleSF_b8 = float(meta.getElementsByTagName('ps:reflectanceCoefficient')[7].firstChild.data)
 
         ds = rasterio.open(file)
-        b6 = ds.read(6) * radioSF_b6
-        b8 = ds.read(8) * radioSF_b8
-        ndvi = (b8 - b6) / (b8 + b6)
-
+        ndvi = ds.read(1) 
+        
         print(ndvi)
         print(ds.width, ds.height)
+        print(ds.bounds)
+        print(type(ds.bounds))
 
-        kwargs = ds.meta
+        #os.system('gdal')
+
+"""         kwargs = ds.meta
         kwargs.update(
             dtype=rasterio.float32,
             count=1,
@@ -46,7 +40,7 @@ for line in lines:
         name = file.split('/')[-1].split('.')[0]+'_ndvi.tif'
 
         with rasterio.open(os.path.join(pathOutput+lineDir, name), 'w', **kwargs) as dst:
-            dst.write_band(1, ndvi.astype(rasterio.float32))
+            dst.write_band(1, ndvi.astype(rasterio.float32)) """
 
 
 
