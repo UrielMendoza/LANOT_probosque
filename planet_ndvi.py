@@ -10,11 +10,11 @@ pathOutput = '/data/output/probosque/planet_ndvi/'
 
 lines = glob(pathInputPlanet+'*')
 
-#print(lines)
+print(lines)
 
 for line in lines:
     filesMeta = glob(line+'/'+'*_metadata.xml')
-    files = glob(line+'/'+'*_harmonized.tif')
+    files = glob(line+'/'+'*_harmonized*.tif')
     filesMeta.sort()
     files.sort()
     for fileMeta,file in zip(filesMeta,files):
