@@ -6,7 +6,7 @@ from xml.dom import minidom
 import os
 
 pathInputPlanet = '/data/input/probosque/PLANET2022/'
-pathOutput = '/data/output/probosque/'
+pathOutput = '/data/output/probosque/planet_ndvi/'
 
 lines = glob(pathInputPlanet+'*')
 
