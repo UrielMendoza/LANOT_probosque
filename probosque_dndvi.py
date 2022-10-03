@@ -25,8 +25,8 @@ for line in lines:
         refleSF_b6 = meta.getElementsByTagName('ps:reflectanceCoefficient')[5].firstChild.data
         refleSF_b8 = meta.getElementsByTagName('ps:reflectanceCoefficient')[7].firstChild.data
         print(radioSF_b6)
-        print(radioSF_b6)
-        print(refleSF_b8)
+        print(radioSF_b8)
+        print(refleSF_b6)
         print(refleSF_b8)
 
         ds = rasterio.open(file)
