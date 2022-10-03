@@ -20,8 +20,8 @@ for line in lines:
         print('Porcesando: '+file)
 
         meta = minidom.parse(fileMeta)
-        radioSF = meta.getElementsByTagName('ps:radiometricScaleFactor')
-        refleSF = meta.getElementsByTagName('ps:reflectanceCoefficient')
+        radioSF = meta.getElementsByTagName('ps:radiometricScaleFactor')[5].firstChild.data
+        refleSF = meta.getElementsByTagName('ps:reflectanceCoefficient')[7].firstChild.data
         print(radioSF)
         print(refleSF)
 
