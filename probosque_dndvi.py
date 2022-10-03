@@ -20,10 +20,14 @@ for line in lines:
         print('Porcesando: '+file)
 
         meta = minidom.parse(fileMeta)
-        radioSF = meta.getElementsByTagName('ps:radiometricScaleFactor')[5].firstChild.data
-        refleSF = meta.getElementsByTagName('ps:reflectanceCoefficient')[7].firstChild.data
-        print(radioSF)
-        print(refleSF)
+        radioSF_b6 = meta.getElementsByTagName('ps:radiometricScaleFactor')[5].firstChild.data
+        radioSF_b6 = meta.getElementsByTagName('ps:radiometricScaleFactor')[7].firstChild.data
+        refleSF_b8 = meta.getElementsByTagName('ps:reflectanceCoefficient')[5].firstChild.data
+        refleSF_b8 = meta.getElementsByTagName('ps:reflectanceCoefficient')[7].firstChild.data
+        print(radioSF_b6)
+        print(radioSF_b6)
+        print(refleSF_b8)
+        print(refleSF_b8)
 
         ds = rasterio.open(file)
         band6 = ds.read(6)
