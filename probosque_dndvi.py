@@ -9,7 +9,7 @@ lines = glob(pathInputPlanet+'*')
 print(lines)
 
 for line in lines:
-    files = glob(pathInputPlanet+line+'/'+'*_harmonized.tif')
+    files = glob(line+'/'+'*_harmonized.tif')
     for file in files:
         print(file)
 
