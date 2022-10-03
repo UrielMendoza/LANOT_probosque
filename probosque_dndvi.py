@@ -3,6 +3,7 @@ from glob import glob
 import rasterio 
 import numpy as np
 from xml.dom import minidom
+import os
 
 pathInputPlanet = '/data/input/probosque/PLANET2022/'
 pathOutput = '/data/output/probosque/'
@@ -33,6 +34,17 @@ for line in lines:
 
         print(ndvi)
         print(ds.width, ds.height)
+
+        kwargs = ds.meta
+        kwargs.update(
+            dtype=rasterio.float32,
+            count=1,
+            compress='lzw')
+
+        name = file.split('.')[0]+'_ndvi.tif'
+
+        with rasterio.open(os.path.join(pathOutput, 'ndvi.tif'), 'w', **kwargs) as dst:
+            dst.write_band(1, ndvi.astype(rasterio.float32))
 
 
 
