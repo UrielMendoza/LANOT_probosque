@@ -43,7 +43,7 @@ for line in lines:
 
         name = file.split('/')[-1].split('.')[0]+'_ndvi.tif'
 
-        with rasterio.open(os.path.join(pathOutput, 'ndvi.tif'), 'w', **kwargs) as dst:
+        with rasterio.open(os.path.join(pathOutput, name), 'w', **kwargs) as dst:
             dst.write_band(1, ndvi.astype(rasterio.float32))
 
 
