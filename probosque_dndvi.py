@@ -6,8 +6,10 @@ pathOutput = ''
 
 lines = glob(pathInputPlanet+'*')
 
+print(lines)
+
 for line in lines:
-    files = glob(pathInputPlanet+'*_harmonized.tif')
+    files = glob(pathInputPlanet+line+'/'+'*_harmonized.tif')
     for file in files:
         print(file)
 
