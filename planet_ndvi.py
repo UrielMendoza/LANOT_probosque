@@ -41,9 +41,11 @@ for line in lines:
             count=1,
             compress='lzw')
 
+        lineDir = line.split('/')[-1]
+        os.system('mkdir '+pathOutput+lineDir) 
         name = file.split('/')[-1].split('.')[0]+'_ndvi.tif'
 
-        with rasterio.open(os.path.join(pathOutput, name), 'w', **kwargs) as dst:
+        with rasterio.open(os.path.join(pathOutput+lineDir, name), 'w', **kwargs) as dst:
             dst.write_band(1, ndvi.astype(rasterio.float32))
 
 
