@@ -7,7 +7,7 @@ import os
 
 pathInput = '/data/output/probosque/planet_ndvi/'
 pathOutput = '/data/output/probosque/planet_spot_dndvi/'
-pathInputSPOT = '/data/input/probosque/mosaico_ndvi_2015/ndvi_mosaico_2015.tif'
+pathInputSPOT = '/data/input/probosque/mosaico_ndvi_2015/ndvi_mosaico_2015_3m.tif'
 
 lines = glob(pathInput+'*')
 
@@ -26,6 +26,10 @@ for line in lines:
         print(ds.width, ds.height)
         print(ds.bounds)
         print(type(ds.bounds))
+
+        left, bottom, right, top = ds.bounds.left, ds.bounds.bottom, ds.bounds.right, ds.bounds.top
+
+        os.system('gdal_translate -projwin '+str(left)+' '+str(top)+' '+str(right)+' '+str(bottom)+' '+)
 
         #os.system('gdal')
 
