@@ -17,7 +17,7 @@ for line in lines:
     files = glob(line+'/'+'*_ndvi.tif')
     files.sort()
     for file in files:
-        print('Porcesando: '+file)
+        print('Procesando: '+file)
 
         ds = rasterio.open(file)
         ndvi = ds.read(1) 
