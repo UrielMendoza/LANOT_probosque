@@ -6,7 +6,7 @@ from xml.dom import minidom
 import os
 
 pathInput = '/data/output/probosque/planet_ndvi/'
-pathOutput = '/data/output/probosque/planet_spot_dndvi/'
+pathOutput = '/data/output/probosque/spot_ndvi/'
 pathInputSPOT = '/data/input/probosque/mosaico_ndvi_2015/ndvi_mosaico_2015_3m.tif'
 
 lines = glob(pathInput+'*')
@@ -24,8 +24,6 @@ for line in lines:
         
         print(ndvi)
         print(ds.width, ds.height)
-        print(ds.bounds)
-        print(type(ds.bounds))
 
         left, bottom, right, top = ds.bounds.left, ds.bounds.bottom, ds.bounds.right, ds.bounds.top
 
@@ -33,9 +31,9 @@ for line in lines:
 
         lineDir = line.split('/')[-1]
         os.system('mkdir '+pathOutput+lineDir) 
-        name = file.split('/')[-1].split('.')[0]+'_ndvi.tif'
+        name = file.split('/')[-1].split('.')[0]+'_spot_ndvi.tif'
 
-        #os.system('gdal_translate -projwin '+str(left)+' '+str(top)+' '+str(right)+' '+str(bottom)+' '+pathInputSPOT+' ')
+        os.system('gdal_translate -projwin '+str(left)+' '+str(top)+' '+str(right)+' '+str(bottom)+' '+pathInputSPOT+' '+pathOutput+name)
 
         #os.system('gdal')
 
