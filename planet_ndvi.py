@@ -21,7 +21,7 @@ for line in lines:
         print('Procesando: '+file)
         print('Meta: '+fileMeta)
 
-        meta = minidom.parse(fileMeta)
+"""         meta = minidom.parse(fileMeta)
         radioSF_b6 = float(meta.getElementsByTagName('ps:radiometricScaleFactor')[5].firstChild.data)
         radioSF_b8 = float(meta.getElementsByTagName('ps:radiometricScaleFactor')[7].firstChild.data)
         refleSF_b6 = float(meta.getElementsByTagName('ps:reflectanceCoefficient')[5].firstChild.data)
@@ -48,7 +48,7 @@ for line in lines:
         name = file.split('/')[-1].split('.')[0]+'_ndvi.tif'
 
         with rasterio.open(os.path.join(pathOutput+lineDir, name), 'w', **kwargs) as dst:
-            dst.write_band(1, ndvi.astype(rasterio.float32))
+            dst.write_band(1, ndvi.astype(rasterio.float32)) """
 
 
 
