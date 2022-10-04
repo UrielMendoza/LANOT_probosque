@@ -28,8 +28,8 @@ for line in lines:
         refleSF_b8 = float(meta.getElementsByTagName('ps:reflectanceCoefficient')[7].firstChild.data)
 
         ds = rasterio.open(file)
-        b6 = ds.read(6) * radioSF_b6
-        b8 = ds.read(8) * radioSF_b8
+        b6 = ds.read(6) * 0.01
+        b8 = ds.read(8) * 0.01
         ndvi = (b8 - b6) / (b8 + b6)
 
         print(ndvi)
