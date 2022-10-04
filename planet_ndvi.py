@@ -15,8 +15,6 @@ print(lines)
 for line in lines:
     filesMeta = glob(line+'/'+'*_metadata.xml')
     files = glob(line+'/'+'*.tif')
-    filesMeta.sort()
-    files.sort()
     for fileMeta,file in zip(filesMeta,files):
         print('Procesando: '+file)
         print('Meta: '+fileMeta)
