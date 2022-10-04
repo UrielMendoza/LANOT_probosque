@@ -17,8 +17,7 @@ for line in lines:
     files = glob(line+'/'+'*.tif')
     filesMeta.sort()
     files.sort()
-    print(files)
-"""     for fileMeta,file in zip(filesMeta,files):
+    for fileMeta,file in zip(filesMeta,files):
         print('Procesando: '+file)
         print('Meta: '+fileMeta)
 
@@ -49,7 +48,7 @@ for line in lines:
         name = file.split('/')[-1].split('.')[0]+'_ndvi.tif'
 
         with rasterio.open(os.path.join(pathOutput+lineDir, name), 'w', **kwargs) as dst:
-            dst.write_band(1, ndvi.astype(rasterio.float32)) """
+            dst.write_band(1, ndvi.astype(rasterio.float32))
 
 
 
