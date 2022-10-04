@@ -34,6 +34,8 @@ for line in lines:
 
         print(ndvi)
         print(ds.width, ds.height)
+        print(ds.bounds)
+        print(type(ds.bounds))
 
         kwargs = ds.meta
         kwargs.update(
