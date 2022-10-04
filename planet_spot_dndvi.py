@@ -29,7 +29,11 @@ for line in lines:
 
         left, bottom, right, top = ds.bounds.left, ds.bounds.bottom, ds.bounds.right, ds.bounds.top
 
-        os.system('gdal_translate -projwin '+str(left)+' '+str(top)+' '+str(right)+' '+str(bottom)+' '+)
+        lineDir = line.split('/')[-1]
+        os.system('mkdir '+pathOutput+lineDir) 
+        name = file.split('/')[-1].split('.')[0]+'_ndvi.tif'
+
+        os.system('gdal_translate -projwin '+str(left)+' '+str(top)+' '+str(right)+' '+str(bottom)+' '+pathInputSPOT+' ')
 
         #os.system('gdal')
 
