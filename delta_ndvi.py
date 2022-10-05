@@ -1,0 +1,43 @@
+import funtions
+from glob import glob
+import rasterio 
+import numpy as np
+from xml.dom import minidom
+import os
+
+pathInputSpot = '/data/output/probosque/spot_ndvi/'
+pathInputPlanet = '/data/output/probosque/planet_ndvi/'
+pathOutput = '/data/output/probosque/delta_ndvi/'
+
+lines = glob(pathInputSpot+'*')
+
+#print(lines)
+
+for line in lines:
+    files = glob(line+'/'+'*_ndvi.tif')
+    files.sort()
+    for file in files:
+        print('Procesando: '+file)
+
+        ds = rasterio.open(file)
+        ndvi = ds.read(1) 
+        
+        print(ndvi)
+        print(ds.width, ds.height)
+
+        left, bottom, right, top = ds.bounds.left, ds.bounds.bottom, ds.bounds.right, ds.bounds.top
+
+        print(left, bottom, right, top)
+
+        lineDir = line.split('/')[-1]
+        os.system('mkdir '+pathOutput+lineDir) 
+        name = file.split('/')[-1].split('.')[0]+'_spot_ndvi.tif'
+
+        os.system('gdal_translate -projwin '+str(left)+' '+str(top)+' '+str(right)+' '+str(bottom)+' '+pathInputSPOT+' '+pathOutput+lineDir+'/'+name)
+
+
+
+
+
+
+
