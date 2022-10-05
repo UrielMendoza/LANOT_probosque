@@ -17,12 +17,12 @@ linesPlanet = glob(pathInputPlanet+'*')
 
 for lineSpot, linePlanet in zip(linesSpot, linesPlanet):
     filesSpot = glob(lineSpot+'/'+'*_ndvi.tif')
-    filesPlanet = glob(linesPlanet+'/'+'*_ndvi.tif')
+    filesPlanet = glob(linePlanet+'/'+'*_ndvi.tif')
 
     filesSpot.sort()
     filesPlanet.sort()
 
-    for fileSpot, filePlanet in filesSpot, filesPlanet:
+    for fileSpot, filePlanet in zip(filesSpot, filesPlanet):
         print('Procesando: '+fileSpot)
         print('Procesando: '+filePlanet)
 
@@ -54,13 +54,13 @@ for lineSpot, linePlanet in zip(linesSpot, linesPlanet):
         name = fileSpot.split('/')[-1].split('.')[0]+'_dndvi.tif'
 
         with rasterio.open(os.path.join(pathOutput+lineDir, name), 'w', **kwargs) as dst:
-            dst.write_band(1, dndvi.astype(rasterio.int16))
+            dst.write_band(1, dndvi.astype(rasterio.float32))
 
         os.system('mkdir '+pathOutputClass+lineDir) 
         name = fileSpot.split('/')[-1].split('.')[0]+'_class_dndvi.tif'
 
         with rasterio.open(os.path.join(pathOutputClass+lineDir, name), 'w', **kwargs) as dst:
-            dst.write_band(1, dndvi_class.astype(rasterio.int16))
+            dst.write_band(1, dndvi_class.astype(rasterio.float32))
 
 
 
