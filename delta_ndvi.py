@@ -38,6 +38,11 @@ for lineSpot, linePlanet in zip(linesSpot, linesPlanet):
         dndvi = ndvi_spot - ndvi_planet 
         dndvi_std = dndvi.std()
 
+        print('Delta NDVI')
+        print(dndvi)
+        print('Desviacion estandar')
+        print(dndvi_std)
+
         dndvi_class = np.where(dndvi < dndvi_std, 1, dndvi)
         dndvi_class = np.where(dndvi_class < dndvi_std, 2, dndvi_class) 
         dndvi_class = np.where(dndvi_class < dndvi_std, 3, dndvi_class) 
@@ -48,7 +53,7 @@ for lineSpot, linePlanet in zip(linesSpot, linesPlanet):
             count=1,
             compress='lzw')      
 
-        lineDir = linesSpot.split('/')[-1]
+        lineDir = lineSpot.split('/')[-1]
 
         os.system('mkdir '+pathOutput+lineDir) 
         name = fileSpot.split('/')[-1].split('.')[0]+'_dndvi.tif'
