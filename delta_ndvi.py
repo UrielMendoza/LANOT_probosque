@@ -8,6 +8,7 @@ import os
 pathInputSpot = '/data/output/probosque/spot_ndvi/'
 pathInputPlanet = '/data/output/probosque/planet_ndvi/'
 pathOutput = '/data/output/probosque/delta_ndvi/'
+pathOutputClass = '/data/output/probosque/delta_class_ndvi/'
 
 linesSpot = glob(pathInputSpot+'*')
 linesPlanet = glob(pathInputPlanet+'*')
@@ -48,10 +49,17 @@ for lineSpot, linePlanet in zip(linesSpot, linesPlanet):
             compress='lzw')      
 
         lineDir = linesSpot.split('/')[-1]
+
         os.system('mkdir '+pathOutput+lineDir) 
         name = fileSpot.split('/')[-1].split('.')[0]+'_dndvi.tif'
 
         with rasterio.open(os.path.join(pathOutput+lineDir, name), 'w', **kwargs) as dst:
+            dst.write_band(1, dndvi.astype(rasterio.int16))
+
+        os.system('mkdir '+pathOutputClass+lineDir) 
+        name = fileSpot.split('/')[-1].split('.')[0]+'_class_dndvi.tif'
+
+        with rasterio.open(os.path.join(pathOutputClass+lineDir, name), 'w', **kwargs) as dst:
             dst.write_band(1, dndvi_class.astype(rasterio.int16))
 
 
