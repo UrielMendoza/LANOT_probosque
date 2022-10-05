@@ -9,31 +9,50 @@ pathInputSpot = '/data/output/probosque/spot_ndvi/'
 pathInputPlanet = '/data/output/probosque/planet_ndvi/'
 pathOutput = '/data/output/probosque/delta_ndvi/'
 
-lines = glob(pathInputSpot+'*')
+linesSpot = glob(pathInputSpot+'*')
+linesPlanet = glob(pathInputPlanet+'*')
 
 #print(lines)
 
-for line in lines:
-    files = glob(line+'/'+'*_ndvi.tif')
-    files.sort()
-    for file in files:
-        print('Procesando: '+file)
+for lineSpot, linePlanet in zip(linesSpot, linesPlanet):
+    filesSpot = glob(lineSpot+'/'+'*_ndvi.tif')
+    filesPlanet = glob(linesPlanet+'/'+'*_ndvi.tif')
 
-        ds = rasterio.open(file)
-        ndvi = ds.read(1) 
+    filesSpot.sort()
+    filesPlanet.sort()
+
+    for fileSpot, filePlanet in filesSpot, filesPlanet:
+        print('Procesando: '+fileSpot)
+        print('Procesando: '+filePlanet)
+
+        ds_spot = rasterio.open(fileSpot)
+        ds_planet = rasterio.open(filePlanet)
+
+        ndvi_spot = ds_spot.read(1) 
+        ndvi_planet = ds_planet.read(1)
         
-        print(ndvi)
-        print(ds.width, ds.height)
+        print(ndvi_spot)
+        print(ndvi_planet)
 
-        left, bottom, right, top = ds.bounds.left, ds.bounds.bottom, ds.bounds.right, ds.bounds.top
+        dndvi = ndvi_spot - ndvi_planet 
+        dndvi_std = dndvi.std()
 
-        print(left, bottom, right, top)
+        dndvi_class = np.where(dndvi < dndvi_std, 1, dndvi)
+        dndvi_class = np.where(dndvi_class < dndvi_std, 2, dndvi_class) 
+        dndvi_class = np.where(dndvi_class < dndvi_std, 3, dndvi_class) 
 
-        lineDir = line.split('/')[-1]
+        kwargs = ds_planet.meta
+        kwargs.update(
+            dtype=rasterio.float32,
+            count=1,
+            compress='lzw')      
+
+        lineDir = linesSpot.split('/')[-1]
         os.system('mkdir '+pathOutput+lineDir) 
-        name = file.split('/')[-1].split('.')[0]+'_spot_ndvi.tif'
+        name = fileSpot.split('/')[-1].split('.')[0]+'_dndvi.tif'
 
-        os.system('gdal_translate -projwin '+str(left)+' '+str(top)+' '+str(right)+' '+str(bottom)+' '+pathInputSPOT+' '+pathOutput+lineDir+'/'+name)
+        with rasterio.open(os.path.join(pathOutput+lineDir, name), 'w', **kwargs) as dst:
+            dst.write_band(1, dndvi_class.astype(rasterio.int16))
 
 
 
