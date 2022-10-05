@@ -31,12 +31,14 @@ for lineSpot, linePlanet in zip(linesSpot, linesPlanet):
 
         ndvi_spot = ds_spot.read(1) 
         ndvi_planet = ds_planet.read(1)
+
+        ndvi_planet = np.where(ndvi_planet < dndvi_std, 2, dndvi_class) 
         
         print(ndvi_spot)
         print(ndvi_planet)
 
         dndvi = ndvi_spot - ndvi_planet 
-        dndvi_std = dndvi.std()
+        dndvi_std = np.nanstd(dndvi)
 
         print('Delta NDVI')
         print(dndvi)
