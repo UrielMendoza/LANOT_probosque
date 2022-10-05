@@ -44,8 +44,8 @@ for lineSpot, linePlanet in zip(linesSpot, linesPlanet):
         print(dndvi_std)
 
         dndvi_class = np.where(dndvi < dndvi_std, 1, dndvi)
-        dndvi_class = np.where(dndvi_class < dndvi_std, 2, dndvi_class) 
-        dndvi_class = np.where(dndvi_class < dndvi_std, 3, dndvi_class) 
+        dndvi_class = np.where((dndvi_class >= dndvi_std) & (dndvi_class <= dndvi_std), 2, dndvi_class) 
+        dndvi_class = np.where(dndvi_class > dndvi_std, 3, dndvi_class) 
 
         kwargs = ds_planet.meta
         kwargs.update(
