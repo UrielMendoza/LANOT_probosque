@@ -45,30 +45,13 @@ for lineSpot, linePlanet in zip(linesSpot, linesPlanet):
 
         dndvi_class = dndvi
 
-        for i in range(dndvi.shape[0]):
-            for j in range(dndvi.shape[1]):
-                print(dndvi[i,j])
-                if (dndvi[i,j] <= (dndvi_std*-3)):
-                    dndvi_class[i,j] = -3
-                elif (dndvi[i,j] <= (dndvi_std*-2)) and (dndvi[i,j] >= (dndvi_std*-3)):
-                    dndvi_class[i,j] = -2
-                elif (dndvi[i,j] <= (dndvi_std*-1)) and (dndvi[i,j] >= (dndvi_std*-2)):
-                    dndvi_class[i,j] = -1
-                elif (dndvi[i,j] >= (dndvi_std*3)):
-                    dndvi_class[i,j] = 3
-                elif (dndvi[i,j] >= (dndvi_std*2)) and (dndvi[i,j] <= (dndvi_std*3)):
-                    dndvi_class[i,j] = 2
-                elif (dndvi[i,j] >= (dndvi_std*1)) and (dndvi[i,j] <= (dndvi_std*2)):
-                    dndvi_class[i,j] = 1
-                else:
-                    dndvi_class[i,j] = 0
-
-        #dndvi_class = np.where( (dndvi <= (dndvi_std*-3)) , -3, dndvi)
-        #dndvi_class = np.where( ((dndvi_class <= (dndvi_std*-2)) & (dndvi_class >= (dndvi_std*-3))) , -2, dndvi_class) 
-        #dndvi_class = np.where( ((dndvi_class <= (dndvi_std*-1)) & (dndvi_class >= (dndvi_std*-2))) , -1, dndvi_class) 
-        #dndvi_class = np.where( (dndvi_class >= (dndvi_std*3)) , 3, dndvi_class)
-        #dndvi_class = np.where( ((dndvi_class >= (dndvi_std*2)) & (dndvi_class <= (dndvi_std*3))) , 2, dndvi_class) 
-        #dndvi_class = np.where( ((dndvi_class >= (dndvi_std*1)) & (dndvi_class <= (dndvi_std*2))) , 1, dndvi_class) 
+        dndvi_class[np.where((dndvi_class <= (dndvi_std*-2)) & (dndvi_class >= (dndvi_std*-3)))] = -2
+        dndvi_class[np.where((dndvi_class <= (dndvi_std*-1)) & (dndvi_class >= (dndvi_std*-2)))] = -1
+        dndvi_class[np.where((dndvi_class >= (dndvi_std*2)) & (dndvi_class <= (dndvi_std*3)))] = 2
+        dndvi_class[np.where((dndvi_class >= (dndvi_std*1)) & (dndvi_class <= (dndvi_std*2)))] = 1
+        dndvi_class[np.where(dndvi_class <= (dndvi_std*-3))] = -3
+        dndvi_class[np.where(dndvi_class >= (dndvi_std*3))] = 3
+        dndvi_class[np.where((dndvi_class != -3) | (dndvi_class != -2) | (dndvi_class != -1) | (dndvi_class != 1) | (dndvi_class != 2) | (dndvi_class != 3))] = 0
 
         kwargs = ds_planet.meta
         kwargs.update(
@@ -89,6 +72,25 @@ for lineSpot, linePlanet in zip(linesSpot, linesPlanet):
 
         with rasterio.open(os.path.join(pathOutputClass+lineDir, name), 'w', **kwargs) as dst:
             dst.write_band(1, dndvi_class.astype(rasterio.float32))
+
+
+"""         for i in range(dndvi.shape[0]):
+            for j in range(dndvi.shape[1]):
+                if (dndvi[i,j] <= (dndvi_std*-3)):
+                    dndvi_class[i,j] = -3
+                elif (dndvi[i,j] <= (dndvi_std*-2)) and (dndvi[i,j] >= (dndvi_std*-3)):
+                    dndvi_class[i,j] = -2
+                elif (dndvi[i,j] <= (dndvi_std*-1)) and (dndvi[i,j] >= (dndvi_std*-2)):
+                    dndvi_class[i,j] = -1
+                elif (dndvi[i,j] >= (dndvi_std*3)):
+                    dndvi_class[i,j] = 3
+                elif (dndvi[i,j] >= (dndvi_std*2)) and (dndvi[i,j] <= (dndvi_std*3)):
+                    dndvi_class[i,j] = 2
+                elif (dndvi[i,j] >= (dndvi_std*1)) and (dndvi[i,j] <= (dndvi_std*2)):
+                    dndvi_class[i,j] = 1
+                else:
+                    dndvi_class[i,j] = 0 """
+
 
 
 
