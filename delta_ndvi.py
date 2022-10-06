@@ -43,7 +43,7 @@ for lineSpot, linePlanet in zip(linesSpot, linesPlanet):
         print('Desviacion estandar')
         print(dndvi_std)
 
-        dndvi_class = np.zeros(dndvi.shape)
+        dndvi_class = dndvi
 
         for i in range(dndvi.shape[0]):
             for j in range(dndvi.shape[1]):
