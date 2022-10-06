@@ -43,9 +43,9 @@ for lineSpot, linePlanet in zip(linesSpot, linesPlanet):
         print('Desviacion estandar')
         print(dndvi_std)
 
-        dndvi_class = np.where( (dndvi <= (dndvi_std*3)) , -3, dndvi)
-        dndvi_class = np.where( ((dndvi_class <= (dndvi_std*2)) & (dndvi_class >= (dndvi_std*3))) , -2, dndvi_class) 
-        dndvi_class = np.where( ((dndvi_class <= (dndvi_std*1)) & (dndvi_class >= (dndvi_std*2))) , -1, dndvi_class) 
+        dndvi_class = np.where( (dndvi <= (dndvi_std*-3)) , -3, dndvi)
+        dndvi_class = np.where( ((dndvi_class <= (dndvi_std*-2)) & (dndvi_class >= (dndvi_std*3))) , -2, dndvi_class) 
+        dndvi_class = np.where( ((dndvi_class <= (dndvi_std*-1)) & (dndvi_class >= (dndvi_std*2))) , -1, dndvi_class) 
         dndvi_class = np.where( (dndvi_class >= (dndvi_std*3)) , 3, dndvi_class)
         dndvi_class = np.where( ((dndvi_class >= (dndvi_std*2)) & (dndvi_class <= (dndvi_std*3))) , 2, dndvi_class) 
         dndvi_class = np.where( ((dndvi_class >= (dndvi_std*1)) & (dndvi_class <= (dndvi_std*2))) , 1, dndvi_class) 
