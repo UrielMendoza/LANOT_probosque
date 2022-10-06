@@ -51,7 +51,7 @@ for lineSpot, linePlanet in zip(linesSpot, linesPlanet):
         dndvi_class[np.where((dndvi_class >= (dndvi_std*1)) & (dndvi_class <= (dndvi_std*2)))] = 1
         dndvi_class[np.where(dndvi_class <= (dndvi_std*-3))] = -3
         dndvi_class[np.where(dndvi_class >= (dndvi_std*3))] = 3
-        #dndvi_class[np.where((dndvi_class != -3) | (dndvi_class != -2) | (dndvi_class != -1) | (dndvi_class != 1) | (dndvi_class != 2) | (dndvi_class != 3))] = 0
+        dndvi_class[np.where((dndvi_class != -3) | (dndvi_class != -2) | (dndvi_class != -1) | (dndvi_class != 1) | (dndvi_class != 2) | (dndvi_class != 3))] = 0
 
         kwargs = ds_planet.meta
         kwargs.update(
