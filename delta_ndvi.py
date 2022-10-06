@@ -47,6 +47,7 @@ for lineSpot, linePlanet in zip(linesSpot, linesPlanet):
 
         for i in range(dndvi.shape[0]):
             for j in range(dndvi.shape[1]):
+                print(dndvi[i,j])
                 if (dndvi[i,j] <= (dndvi_std*-3)):
                     dndvi_class[i,j] = -3
                 elif (dndvi[i,j] <= (dndvi_std*-2)) and (dndvi[i,j] >= (dndvi_std*-3)):
