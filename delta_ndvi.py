@@ -43,12 +43,31 @@ for lineSpot, linePlanet in zip(linesSpot, linesPlanet):
         print('Desviacion estandar')
         print(dndvi_std)
 
-        dndvi_class = np.where( (dndvi <= (dndvi_std*-3)) , -3, dndvi)
-        dndvi_class = np.where( ((dndvi_class <= (dndvi_std*-2)) & (dndvi_class >= (dndvi_std*-3))) , -2, dndvi_class) 
-        dndvi_class = np.where( ((dndvi_class <= (dndvi_std*-1)) & (dndvi_class >= (dndvi_std*-2))) , -1, dndvi_class) 
-        dndvi_class = np.where( (dndvi_class >= (dndvi_std*3)) , 3, dndvi_class)
-        dndvi_class = np.where( ((dndvi_class >= (dndvi_std*2)) & (dndvi_class <= (dndvi_std*3))) , 2, dndvi_class) 
-        dndvi_class = np.where( ((dndvi_class >= (dndvi_std*1)) & (dndvi_class <= (dndvi_std*2))) , 1, dndvi_class) 
+        dndvi_class = np.zeros(dndvi.shape)
+
+        for i in range(dndvi.shape[0]):
+            for j in range(dndvi.shape[1]):
+                if (dndvi[i,j] <= (dndvi_std*-3)):
+                    dndvi_class[i,j] = -3
+                elif (dndvi[i,j] <= (dndvi_std*-2)) and (dndvi[i,j] >= (dndvi_std*-3)):
+                    dndvi_class[i,j] = -2
+                elif (dndvi[i,j] <= (dndvi_std*-1)) and (dndvi[i,j] >= (dndvi_std*-2)):
+                    dndvi_class[i,j] = -1
+                elif (dndvi[i,j] >= (dndvi_std*3)):
+                    dndvi_class[i,j] = 3
+                elif (dndvi[i,j] >= (dndvi_std*2)) and (dndvi[i,j] <= (dndvi_std*3)):
+                    dndvi_class[i,j] = 2
+                elif (dndvi[i,j] >= (dndvi_std*1)) and (dndvi[i,j] <= (dndvi_std*2)):
+                    dndvi_class[i,j] = 1
+                else:
+                    dndvi_class[i,j] = 0
+
+        #dndvi_class = np.where( (dndvi <= (dndvi_std*-3)) , -3, dndvi)
+        #dndvi_class = np.where( ((dndvi_class <= (dndvi_std*-2)) & (dndvi_class >= (dndvi_std*-3))) , -2, dndvi_class) 
+        #dndvi_class = np.where( ((dndvi_class <= (dndvi_std*-1)) & (dndvi_class >= (dndvi_std*-2))) , -1, dndvi_class) 
+        #dndvi_class = np.where( (dndvi_class >= (dndvi_std*3)) , 3, dndvi_class)
+        #dndvi_class = np.where( ((dndvi_class >= (dndvi_std*2)) & (dndvi_class <= (dndvi_std*3))) , 2, dndvi_class) 
+        #dndvi_class = np.where( ((dndvi_class >= (dndvi_std*1)) & (dndvi_class <= (dndvi_std*2))) , 1, dndvi_class) 
 
         kwargs = ds_planet.meta
         kwargs.update(
