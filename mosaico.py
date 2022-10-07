@@ -29,4 +29,4 @@ pathInputSpot = '/data/output/probosque/spot_ndvi/'
 pathOutput = '/data/output/probosque/mosaicos/'
 
 createMosaic(pathInputPlanet,'planet_ndvi_2022',pathOutput)
-createMosaic(pathInputPlanet,'spot_ndvi_2015',pathOutput)
+createMosaic(pathInputSpot,'spot_ndvi_2015',pathOutput)
