@@ -43,8 +43,36 @@ for lineSpot, linePlanet in zip(linesSpot, linesPlanet):
         print('Desviacion estandar')
         print(dndvi_std)
 
-        dndvi_class = dndvi.copy()
+        kwargs = ds_planet.meta
+        kwargs.update(
+            dtype=rasterio.float32,
+            count=1,
+            compress='lzw')      
 
+        lineDir = lineSpot.split('/')[-1]
+
+        os.system('mkdir '+pathOutput+lineDir) 
+        name = fileSpot.split('/')[-1].split('.')[0]+'_dndvi.tif'
+
+        with rasterio.open(os.path.join(pathOutput+lineDir, name), 'w', **kwargs) as dst:
+            dst.write_band(1, dndvi.astype(rasterio.float32))
+
+        dndvi_class = dndvi.copy()
+        
+        os.system('mkdir '+pathOutputClass+lineDir) 
+
+        for i in range(1,4):
+            dndvi_class[np.where(dndvi_class < (dndvi_std*-1*i))] = -1
+            dndvi_class[np.where((dndvi_class >= (dndvi_std*-1*i)) & (dndvi_class <= (dndvi_std*i)))] = 0
+            dndvi_class[np.where(dndvi_class > (dndvi_std*i))] = 1
+            
+            name = fileSpot.split('/')[-1].split('.')[0]+'_class_'+str(i)+'sd_dndvi.tif'
+
+            with rasterio.open(os.path.join(pathOutputClass+lineDir, name), 'w', **kwargs) as dst:
+                dst.write_band(1, dndvi_class.astype(rasterio.float32))
+
+
+"""
         for i in range(dndvi.shape[0]):
             for j in range(dndvi.shape[1]):
                 if (dndvi[i,j] <= (dndvi_std*-3)):
@@ -61,38 +89,7 @@ for lineSpot, linePlanet in zip(linesSpot, linesPlanet):
                     dndvi_class[i,j] = 1
                 else:
                     dndvi_class[i,j] = 0
-
-        #dndvi_class[np.where(dndvi_class <= (dndvi_std*-3))] = -3
-        #dndvi_class[np.where(dndvi_class >= (dndvi_std*3))] = 3
-        #dndvi_class[np.where((dndvi_class <= (dndvi_std*-2)) & (dndvi_class >= (dndvi_std*-3)))] = -2
-        #dndvi_class[np.where((dndvi_class <= (dndvi_std*-1)) & (dndvi_class >= (dndvi_std*-2)))] = -1
-        #dndvi_class[np.where((dndvi_class >= (dndvi_std*2)) & (dndvi_class <= (dndvi_std*3)))] = 2
-        #dndvi_class[np.where((dndvi_class >= (dndvi_std*1)) & (dndvi_class <= (dndvi_std*2)))] = 1
-
-        #dndvi_class[np.where((dndvi_class != -3) | (dndvi_class != -2) | (dndvi_class != -1) | (dndvi_class != 1) | (dndvi_class != 2) | (dndvi_class != 3))] = 0
-
-        kwargs = ds_planet.meta
-        kwargs.update(
-            dtype=rasterio.float32,
-            count=1,
-            compress='lzw')      
-
-        lineDir = lineSpot.split('/')[-1]
-
-        os.system('mkdir '+pathOutput+lineDir) 
-        name = fileSpot.split('/')[-1].split('.')[0]+'_dndvi.tif'
-
-        with rasterio.open(os.path.join(pathOutput+lineDir, name), 'w', **kwargs) as dst:
-            dst.write_band(1, dndvi.astype(rasterio.float32))
-
-        os.system('mkdir '+pathOutputClass+lineDir) 
-        name = fileSpot.split('/')[-1].split('.')[0]+'_class_dndvi.tif'
-
-        with rasterio.open(os.path.join(pathOutputClass+lineDir, name), 'w', **kwargs) as dst:
-            dst.write_band(1, dndvi_class.astype(rasterio.float32))
-
-
-"""          """
+"""
 
 
 
