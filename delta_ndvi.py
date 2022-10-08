@@ -1,4 +1,4 @@
-import funtions
+
 from glob import glob
 import rasterio 
 import numpy as np
