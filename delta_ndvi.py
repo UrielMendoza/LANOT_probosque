@@ -37,11 +37,14 @@ for lineSpot, linePlanet in zip(linesSpot, linesPlanet):
 
         dndvi = ndvi_spot - ndvi_planet 
         dndvi_std = np.nanstd(dndvi)
+        dndvi_mean = np.nanmean(dndvi)
 
         print('Delta NDVI')
         print(dndvi)
         print('Desviacion estandar')
         print(dndvi_std)
+        print('Media')
+        print(dndvi_mean)
 
         kwargs = ds_planet.meta
         kwargs.update(
@@ -62,9 +65,9 @@ for lineSpot, linePlanet in zip(linesSpot, linesPlanet):
         os.system('mkdir '+pathOutputClass+lineDir) 
 
         for i in range(1,4):
-            dndvi_class[np.where(dndvi_class < (dndvi_std*-1*i))] = -1
-            dndvi_class[np.where((dndvi_class >= (dndvi_std*-1*i)) & (dndvi_class <= (dndvi_std*i)))] = 0
-            dndvi_class[np.where(dndvi_class > (dndvi_std*i))] = 1
+            dndvi_class[np.where(dndvi_class < (dndvi_mean - dndvi_std*i))] = -1
+            dndvi_class[np.where((dndvi_class >= (dndvi_mean - dndvi_std*i)) & (dndvi_class <= (dndvi_mean + dndvi_std*i)))] = 0
+            dndvi_class[np.where(dndvi_class > (dndvi_mean + dndvi_std*i))] = 1
             
             name = fileSpot.split('/')[-1].split('.')[0]+'_class_'+str(i)+'sd_dndvi.tif'
 
