@@ -12,13 +12,13 @@ lines = glob(pathInputPlanet+'*')
 print(lines)
 
 for line in lines:
-    filesMeta = glob(line+'/'+'*.xml')
-    files = glob(line+'/'+'*.tif')
-    filesMeta.sort()
+    #filesMeta = glob(line+'/'+'*.xml')
+    files = glob(line+'/'+'*harmonized*')
+    #filesMeta.sort()
     files.sort()
-    for fileMeta,file in zip(filesMeta,files):
+    for file in files:
         print('Procesando: '+file)
-        print('Meta: '+fileMeta)
+        #print('Meta: '+fileMeta)
 
         #meta = minidom.parse(fileMeta)
         #radioSF_b6 = float(meta.getElementsByTagName('ps:radiometricScaleFactor')[5].firstChild.data)
