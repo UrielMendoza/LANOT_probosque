@@ -32,7 +32,7 @@ for line in lines:
         os.system('mkdir '+pathOutput+lineDir) 
         name = file.split('/')[-1].split('.')[0]+'_spot_ndvi.tif'
 
-        os.system('gdal_translate -projwin '+str(left)+' '+str(top)+' '+str(right)+' '+str(bottom)+' '+pathInputSPOT+' '+pathOutput+lineDir+'/'+name)
+        os.system('gdal_translate -a_nodata 0 -projwin '+str(left)+' '+str(top)+' '+str(right)+' '+str(bottom)+' '+pathInputSPOT+' '+pathOutput+lineDir+'/'+name)
 
 
 
