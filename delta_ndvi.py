@@ -83,11 +83,11 @@ for lineSpot, linePlanet in zip(linesSpot, linesPlanet):
                     else:
                         dndvi_class[i,j] = 0
                 
-                os.system('mkdir '+pathOutputClass+lineDir) 
-                name = fileSpot.split('/')[-1].split('.')[0]+'_class_dndvi.tif'
+            os.system('mkdir '+pathOutputClass+lineDir) 
+            name = fileSpot.split('/')[-1].split('.')[0]+'_class_dndvi.tif'
 
-                with rasterio.open(os.path.join(pathOutputClass+lineDir, name), 'w', **kwargs) as dst:
-                    dst.write_band(1, dndvi_class.astype(rasterio.int16))
+            with rasterio.open(os.path.join(pathOutputClass+lineDir, name), 'w', **kwargs) as dst:
+                dst.write_band(1, dndvi_class.astype(rasterio.int16))
         
         else:
             continue
