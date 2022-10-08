@@ -22,11 +22,11 @@ for lineSpot, linePlanet in zip(linesSpot, linesPlanet):
     filesSpot.sort()
     filesPlanet.sort()
 
-    if lineSpot.split('/')[-1] == 'L3':
+    for fileSpot, filePlanet in zip(filesSpot, filesPlanet):
+        print('Procesando: '+fileSpot)
+        print('Procesando: '+filePlanet)
 
-        for fileSpot, filePlanet in zip(filesSpot, filesPlanet):
-            print('Procesando: '+fileSpot)
-            print('Procesando: '+filePlanet)
+        if filePlanet == '/data/output/probosque/planet_ndvi/L3/L3_07_20220201_165242_52_248c_3B_AnalyticMS_SR_8b_harmonized_ndvi.tif':
 
             ds_spot = rasterio.open(fileSpot)
             ds_planet = rasterio.open(filePlanet)
@@ -63,10 +63,37 @@ for lineSpot, linePlanet in zip(linesSpot, linesPlanet):
                 dst.write_band(1, dndvi.astype(rasterio.float32))
 
             dndvi_class = dndvi.copy()
-            
-            os.system('mkdir '+pathOutputClass+lineDir) 
 
-            for i in range(1,4):
+            for i in range(dndvi.shape[0]):
+                for j in range(dndvi.shape[1]):
+                    if (dndvi[i,j] <= (dndvi_mean - dndvi_std*3)):
+                        dndvi_class[i,j] = -3
+                    elif (dndvi[i,j] <= (dndvi_mean - dndvi_std*2)) and (dndvi[i,j] >= (dndvi_mean - dndvi_std*3)):
+                        dndvi_class[i,j] = -2
+                    elif (dndvi[i,j] <= (dndvi_mean - dndvi_std*1)) and (dndvi[i,j] >= (dndvi_mean - dndvi_std*2)):
+                        dndvi_class[i,j] = -1
+                    elif (dndvi[i,j] >= (dndvi_mean - dndvi_std*1)) and (dndvi[i,j] <= (dndvi_mean + dndvi_std*1)):
+                        dndvi_class[i,j] = 0
+                    elif (dndvi[i,j] >= (dndvi_mean + dndvi_std*3)):
+                        dndvi_class[i,j] = 3
+                    elif (dndvi[i,j] >= (dndvi_mean + dndvi_std*2)) and (dndvi[i,j] <= (dndvi_mean + dndvi_std*3)):
+                        dndvi_class[i,j] = 2
+                    elif (dndvi[i,j] >= (dndvi_mean + dndvi_std*1)) and (dndvi[i,j] <= (dndvi_mean + dndvi_std*2)):
+                        dndvi_class[i,j] = 1
+                    else:
+                        dndvi_class[i,j] = 0
+                
+                os.system('mkdir '+pathOutputClass+lineDir) 
+                name = fileSpot.split('/')[-1].split('.')[0]+'_class_dndvi.tif'
+
+                with rasterio.open(os.path.join(pathOutputClass+lineDir, name), 'w', **kwargs) as dst:
+                    dst.write_band(1, dndvi_class.astype(rasterio.int16))
+        
+        else:
+            continue
+
+
+"""             for i in range(1,4):
                 dndvi_class[np.where(dndvi_class < (dndvi_mean - dndvi_std*i))] = -1
                 dndvi_class[np.where((dndvi_class >= (dndvi_mean - dndvi_std*i)) & (dndvi_class <= (dndvi_mean + dndvi_std*i)))] = 0
                 dndvi_class[np.where(dndvi_class > (dndvi_mean + dndvi_std*i))] = 1
@@ -74,32 +101,8 @@ for lineSpot, linePlanet in zip(linesSpot, linesPlanet):
                 name = fileSpot.split('/')[-1].split('.')[0]+'_class_'+str(i)+'sd_dndvi.tif'
 
                 with rasterio.open(os.path.join(pathOutputClass+lineDir, name), 'w', **kwargs) as dst:
-                    dst.write_band(1, dndvi_class.astype(rasterio.int16))
+                    dst.write_band(1, dndvi_class.astype(rasterio.int16)) """
 
-
-    else:
-        continue
-
-
-
-"""         for i in range(dndvi.shape[0]):
-            for j in range(dndvi.shape[1]):
-                if (dndvi[i,j] <= (dndvi_std*-3)):
-                    dndvi_class[i,j] = -3
-                elif (dndvi[i,j] <= (dndvi_std*-2)) and (dndvi[i,j] >= (dndvi_std*-3)):
-                    dndvi_class[i,j] = -2
-                elif (dndvi[i,j] <= (dndvi_std*-1)) and (dndvi[i,j] >= (dndvi_std*-2)):
-                    dndvi_class[i,j] = -1
-                elif (dndvi[i,j] >= (dndvi_std*-1)) and (dndvi[i,j] <= (dndvi_std*1)):
-                    dndvi_class[i,j] = 0
-                elif (dndvi[i,j] >= (dndvi_std*3)):
-                    dndvi_class[i,j] = 3
-                elif (dndvi[i,j] >= (dndvi_std*2)) and (dndvi[i,j] <= (dndvi_std*3)):
-                    dndvi_class[i,j] = 2
-                elif (dndvi[i,j] >= (dndvi_std*1)) and (dndvi[i,j] <= (dndvi_std*2)):
-                    dndvi_class[i,j] = 1
-                else:
-                    dndvi_class[i,j] = 0 """
 
 
 
