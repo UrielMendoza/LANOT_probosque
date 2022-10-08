@@ -68,7 +68,7 @@ for lineSpot, linePlanet in zip(linesSpot, linesPlanet):
             inter1 = str(dndvi_mean - (dndvi_std*i))
             inter2 = str(dndvi_mean + (dndvi_std*i))
 
-            name_class = '_'.join(fileSpot.split('/')[-1].split('.')[0].split('_')[:-2])+'_'+str(i)+'_dndvi.tif'
+            name_class = '_'.join(fileSpot.split('/')[-1].split('.')[0].split('_')[:-2])+'_'+str(i)+'sd_dndvi.tif'
 
             os.system('gdal_calc.py --overwrite -A '+pathOutput+lineDir+'/'+name+' --outfile='+pathOutputClass+lineDir+'/'+name_class+' --calc="-1*(A<'+inter1+')+0*(A*logical_and(A>='+inter1+',A<='+inter2+'))+1*(A>'+inter2+')"')
 
