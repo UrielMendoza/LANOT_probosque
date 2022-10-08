@@ -70,7 +70,7 @@ for lineSpot, linePlanet in zip(linesSpot, linesPlanet):
 
             name_class = '_'.join(fileSpot.split('/')[-1].split('.')[0].split('_')[:-2])+'_'+str(i)+'_dndvi.tif'
 
-            os.system('gdal_calc.py --overwrite -A '+pathOutput+lineDir+'/'+name+' --outfile='+pathOutputClass+lineDir+'/'name_class+' --calc="-1*(A<'+inter1+')+0*(A*logical_and(A>='+inter1+',A<='+inter2+'))+1*(A>'+inter2+')"')
+            os.system('gdal_calc.py --overwrite -A '+pathOutput+lineDir+'/'+name+' --outfile='+pathOutputClass+lineDir+'/'+name_class+' --calc="-1*(A<'+inter1+')+0*(A*logical_and(A>='+inter1+',A<='+inter2+'))+1*(A>'+inter2+')"')
 
 
 
