@@ -72,7 +72,7 @@ for lineSpot, linePlanet in zip(linesSpot, linesPlanet):
 
                 name_class = fileSpot.split('/')[-1].split('.')[0]+'_class_'+str(i)+'sd_dndvi.tif'
 
-                os.system('gdal_calc.py -A '+pathOutput+lineDir+name+' --outfile='+pathOutputClass+name_class+' --calc="-1*(A<'+inter1+')+0*(A*logical_and(A>='+inter1+',A<='+inter2+'))+1*(A>'+inter2+')"')
+                os.system('gdal_calc.py -A '+pathOutput+lineDir+'/'+name+' --outfile='+pathOutputClass+name_class+' --calc="-1*(A<'+inter1+')+0*(A*logical_and(A>='+inter1+',A<='+inter2+'))+1*(A>'+inter2+')"')
         
         else:
             continue
