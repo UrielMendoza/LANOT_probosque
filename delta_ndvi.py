@@ -24,58 +24,54 @@ for lineSpot, linePlanet in zip(linesSpot, linesPlanet):
 
     for fileSpot, filePlanet in zip(filesSpot, filesPlanet):
         print('Procesando: '+fileSpot)
-        print('Procesando: '+filePlanet)
+        print('Procesando: '+filePlanet)        
 
-        if filePlanet == '/data/output/probosque/planet_ndvi/L3/L3_07_20220201_165242_52_248c_3B_AnalyticMS_SR_8b_harmonized_ndvi.tif':
+        ds_spot = rasterio.open(fileSpot)
+        ds_planet = rasterio.open(filePlanet)
 
-            ds_spot = rasterio.open(fileSpot)
-            ds_planet = rasterio.open(filePlanet)
-
-            ndvi_spot = ds_spot.read(1) 
-            ndvi_planet = ds_planet.read(1)
-            
-            print(ndvi_spot)
-            print(ndvi_planet)
-
-            dndvi = ndvi_spot - ndvi_planet 
-            dndvi_std = np.nanstd(dndvi)
-            dndvi_mean = np.nanmean(dndvi)
-
-            print('Delta NDVI')
-            print(dndvi)
-            print('Desviacion estandar')
-            print(dndvi_std)
-            print('Media')
-            print(dndvi_mean)
-
-            kwargs = ds_planet.meta
-            kwargs.update(
-                dtype=rasterio.float32,
-                count=1,
-                compress='lzw')      
-
-            lineDir = lineSpot.split('/')[-1]
-
-            os.system('mkdir '+pathOutput+lineDir) 
-            name = fileSpot.split('/')[-1].split('.')[0]+'_dndvi.tif'
-
-            with rasterio.open(os.path.join(pathOutput+lineDir, name), 'w', **kwargs) as dst:
-                dst.write_band(1, dndvi.astype(rasterio.float32))
-
-            #dndvi_class = dndvi.copy()
-                
-            os.system('mkdir '+pathOutputClass+lineDir) 
-            
-            for i in range(1,4):
-                inter1 = str(dndvi_mean - (dndvi_std*i))
-                inter2 = str(dndvi_mean + (dndvi_std*i))
-
-                name_class = fileSpot.split('/')[-1].split('.')[0]+'_class_'+str(i)+'sd_dndvi.tif'
-
-                os.system('gdal_calc.py --overwrite -A '+pathOutput+lineDir+'/'+name+' --outfile='+pathOutputClass+name_class+' --calc="-1*(A<'+inter1+')+0*(A*logical_and(A>='+inter1+',A<='+inter2+'))+1*(A>'+inter2+')"')
+        ndvi_spot = ds_spot.read(1) 
+        ndvi_planet = ds_planet.read(1)
         
-        else:
-            continue
+        print(ndvi_spot)
+        print(ndvi_planet)
+
+        dndvi = ndvi_spot - ndvi_planet 
+        dndvi_std = np.nanstd(dndvi)
+        dndvi_mean = np.nanmean(dndvi)
+
+        print('Delta NDVI')
+        print(dndvi)
+        print('Desviacion estandar')
+        print(dndvi_std)
+        print('Media')
+        print(dndvi_mean)
+
+        kwargs = ds_planet.meta
+        kwargs.update(
+            dtype=rasterio.float32,
+            count=1,
+            compress='lzw')      
+
+        lineDir = lineSpot.split('/')[-1]
+
+        os.system('mkdir '+pathOutput+lineDir) 
+        name = '_'.join(fileSpot.split('/')[-1].split('.')[0].split('_')[:-2])+'_dndvi.tif'
+
+        with rasterio.open(os.path.join(pathOutput+lineDir, name), 'w', **kwargs) as dst:
+            dst.write_band(1, dndvi.astype(rasterio.float32))
+
+        #dndvi_class = dndvi.copy()
+            
+        os.system('mkdir '+pathOutputClass+lineDir) 
+        
+        for i in range(1,4):
+            inter1 = str(dndvi_mean - (dndvi_std*i))
+            inter2 = str(dndvi_mean + (dndvi_std*i))
+
+            name_class = '_'.join(fileSpot.split('/')[-1].split('.')[0].split('_')[:-2])+'_'+str(i)+'_dndvi.tif'
+
+            os.system('gdal_calc.py --overwrite -A '+pathOutput+lineDir+'/'+name+' --outfile='+pathOutputClass+lineDir+'/'name_class+' --calc="-1*(A<'+inter1+')+0*(A*logical_and(A>='+inter1+',A<='+inter2+'))+1*(A>'+inter2+')"')
+
 
 
 """             for i in range(1,4):

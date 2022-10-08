@@ -44,7 +44,7 @@ for line in lines:
 
         lineDir = line.split('/')[-1]
         os.system('mkdir '+pathOutput+lineDir) 
-        name = file.split('/')[-1].split('.')[0]+'_ndvi.tif'
+        name = file.split('/')[-1].split('.')[0]+'_planet_ndvi.tif'
 
         with rasterio.open(os.path.join(pathOutput+lineDir, name), 'w', **kwargs) as dst:
             dst.write_band(1, ndvi.astype(rasterio.float32))
