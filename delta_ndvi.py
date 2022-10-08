@@ -22,7 +22,6 @@ for lineSpot, linePlanet in zip(linesSpot, linesPlanet):
     filesSpot.sort()
     filesPlanet.sort()
 
-    print(lineSpot)
     if lineSpot.split('/')[-1] == 'L7':
 
         for fileSpot, filePlanet in zip(filesSpot, filesPlanet):
