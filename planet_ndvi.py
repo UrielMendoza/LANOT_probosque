@@ -27,7 +27,7 @@ for line in lines:
         #refleSF_b6 = float(meta.getElementsByTagName('ps:reflectanceCoefficient')[5].firstChild.data)
         #refleSF_b8 = float(meta.getElementsByTagName('ps:reflectanceCoefficient')[7].firstChild.data)
 
-        ds = rasterio.open(file)
+"""         ds = rasterio.open(file)
         b6 = ds.read(6) * 0.01
         b8 = ds.read(8) * 0.01
         ndvi = (b8 - b6) / (b8 + b6)
@@ -48,7 +48,7 @@ for line in lines:
         name = file.split('/')[-1].split('.')[0]+'_ndvi.tif'
 
         with rasterio.open(os.path.join(pathOutput+lineDir, name), 'w', **kwargs) as dst:
-            dst.write_band(1, ndvi.astype(rasterio.float32))
+            dst.write_band(1, ndvi.astype(rasterio.float32)) """
 
 
 
