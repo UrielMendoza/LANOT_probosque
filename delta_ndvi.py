@@ -23,7 +23,7 @@ for lineSpot, linePlanet in zip(linesSpot, linesPlanet):
     filesPlanet.sort()
 
     print(lineSpot)
-    if lineSpot.split('/') == 'L7':
+    if lineSpot.split('/')[-1] == 'L7':
 
         for fileSpot, filePlanet in zip(filesSpot, filesPlanet):
             print('Procesando: '+fileSpot)
