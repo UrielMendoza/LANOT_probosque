@@ -47,9 +47,9 @@ pathInputDeltaClass = '/data/output/probosque/delta_class_ndvi/'
 
 pathOutput = '/data/output/probosque/mosaicos/'
 
-createMosaic(pathInputPlanet,'planet_ndvi_2022',pathOutput)
-createMosaic(pathInputSpot,'spot_ndvi_2015',pathOutput)
-createMosaic(pathInputDelta,'spot_planet_dndvi',pathOutput)
-createMosaicClass(pathInputDelta,'spot_planet_dndvi_1sd','1sd',pathOutput)
-createMosaicClass(pathInputDelta,'spot_planet_dndvi_2sd','2sd',pathOutput)
-createMosaicClass(pathInputDelta,'spot_planet_dndvi_3sd','3sd',pathOutput)
+#createMosaic(pathInputPlanet,'planet_ndvi_2022',pathOutput)
+#createMosaic(pathInputSpot,'spot_ndvi_2015',pathOutput)
+#createMosaic(pathInputDelta,'spot_planet_dndvi',pathOutput)
+createMosaicClass(pathInputDeltaClass,'spot_planet_dndvi_1sd','1sd',pathOutput)
+createMosaicClass(pathInputDeltaClass,'spot_planet_dndvi_2sd','2sd',pathOutput)
+createMosaicClass(pathInputDeltaClass,'spot_planet_dndvi_3sd','3sd',pathOutput)
