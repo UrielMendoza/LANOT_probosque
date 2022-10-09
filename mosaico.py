@@ -42,10 +42,14 @@ def createMosaicClass(pathInput,nombre,sd,pathOutput):
 
 pathInputPlanet = '/data/output/probosque/planet_ndvi/'
 pathInputSpot = '/data/output/probosque/spot_ndvi/'
-#pathInputDelta = '/data/output/probosque/planet_ndvi/'
-#pathInputDeltaClass = '/data/output/probosque/planet_ndvi/'
+pathInputDelta = '/data/output/probosque/delta_ndvi/'
+pathInputDeltaClass = '/data/output/probosque/delta_class_ndvi/'
 
 pathOutput = '/data/output/probosque/mosaicos/'
 
 createMosaic(pathInputPlanet,'planet_ndvi_2022',pathOutput)
 createMosaic(pathInputSpot,'spot_ndvi_2015',pathOutput)
+createMosaic(pathInputDelta,'spot_planet_dndvi',pathOutput)
+createMosaicClass(pathInputDelta,'spot_planet_dndvi_1sd','1sd',pathOutput)
+createMosaicClass(pathInputDelta,'spot_planet_dndvi_2sd','2sd',pathOutput)
+createMosaicClass(pathInputDelta,'spot_planet_dndvi_3sd','3sd',pathOutput)
