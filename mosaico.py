@@ -35,7 +35,7 @@ def createMosaicClass(pathInput,nombre,sd,pathOutput):
     nomMosaicTif = pathOutput+nombre+'.tif'
 
     # Mosaico con fecha
-    os.system('gdal_merge.py -n nan -o '+pathOutput+nombre+'_tmp.tif '+mosaicos)
+    os.system('gdal_merge.py -ot Int32 -n nan -o '+pathOutput+nombre+'_tmp.tif '+mosaicos)
     # Optimiza el geotiff
     os.system('gdal_translate -CO "TILED=YES" -CO "BLOCKXSIZE=512" -CO "BLOCKYSIZE=512" -CO "BIGTIFF=YES" '+pathOutput+nombre+'_tmp.tif '+nomMosaicTif)
     os.system('gdaladdo -r average '+nomMosaicTif+' 2 4 8 16 32')
