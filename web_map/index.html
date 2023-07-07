@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PROBOSQUE Cambio Cobertura Arbórea 2015-2022</title>
+
+    <!-- Favicon -->
+    <!-- <link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" /> -->
+
+    <!-- Leaflet --> 
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+    <!-- Mapa -->
+    <!-- <script src="./js/main.js"></script> -->
+
+    <!-- Estilo -->
+    <!-- <link rel="stylesheet" href="./css/style.css"> -->
+
+    <style>
+        /* Estilo general limpio */
+        :root {
+            /*Colores*/
+            --green_probosque-: #30a578;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            font-size: 62.5%;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        /* Mapa tamaño completo*/
+        #map {
+            height: 100vh;
+            width: 100vw;
+        }
+
+    </style>
+    
+
+</head>
+<body>
+    
+    <!-- Mapa -->
+    <div id="map"></div>
+
+    <script>
+
+        // Mapa
+        const map = L.map('map').setView([19.3, -99.5], 9);
+        
+        // Capa de OSM
+        const osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+        
+        // Capas WMS
+        const wms = 'http://132.247.103.145:8080/geoserver/probosque/wms?service=WMS'
+
+        var spot_ndvi_2015 = L.tileLayer.wms(wms, {
+            layers: 'probosque:spot_ndvi_2015'
+        })
+
+        var planet_ndvi_2022 = L.tileLayer.wms(wms, {
+            layers: 'probosque:planet_ndvi_2022'
+        }).addTo(map)
+
+        var spot_planet_dndvi = L.tileLayer.wms(wms, {
+            layers: 'probosque:spot_planet_dndvi'
+        })
+
+        var spot_planet_dndvi_1sd = L.tileLayer.wms(wms, {
+            layers: 'probosque:spot_planet_dndvi_1sd'
+        })
+
+        var spot_planet_dndvi_2sd = L.tileLayer.wms(wms, {
+            layers: 'probosque:spot_planet_dndvi_2sd'
+        })
+
+        var spot_planet_dndvi_3sd = L.tileLayer.wms(wms, {
+            layers: 'probosque:spot_planet_dndvi_3sd'
+        })
+
+        // Control de capas
+        var baseMaps = {
+            "OSM": osm
+        };
+        var overlays = {
+        "Spot NDVI 2015": spot_ndvi_2015,
+        "Planet NDVI 2022": planet_ndvi_2022,
+        "Spot-Planet DNDVI": spot_planet_dndvi,
+        "Spot-Planet DNDVI 1 SD": spot_planet_dndvi_1sd,
+        "Spot-Planet DNDVI 2 SD": spot_planet_dndvi_2sd,
+        "Spot-Planet DNDVI 3 SD": spot_planet_dndvi_3sd
+        };
+
+        // Crear el controlador de capas y agregarlo al mapa
+        L.control.layers(baseMaps, overlays).addTo(map);
+
+    </script>
+    
+
+</body>
+</html>

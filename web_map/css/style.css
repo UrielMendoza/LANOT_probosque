@@ -1,0 +1,22 @@
+/* Estilo general limpio */
+:root {
+    /*Colores*/
+    --green_probosque-: #30a578;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 62.5%;
+    font-family: 'Roboto', sans-serif;
+}
+
+.map {
+    height: 100vh;
+    width: 100%;
+}
+
