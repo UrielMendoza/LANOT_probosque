@@ -4,23 +4,21 @@ import numpy as np
 #from xml.dom import minidom
 import os
 
-# Funcion que crear un compuesto RGB de Planet con las bandas como dataset de rasterio
+# Funcion que crea los compuestos RGB con las bandas de Planet
 def rgb(line, file, bands, rgb_name, pathOutput):
     ds = rasterio.open(file)
     r = ds.read(bands[0])
     g = ds.read(bands[1])
     b = ds.read(bands[2])
+    
+    # Verificar y ajustar las dimensiones de las bandas si es necesario
+    if r.shape != g.shape or r.shape != b.shape:
+        raise ValueError("Las dimensiones de las bandas no son consistentes")
+    
     rgb = np.dstack((r , g , b))
-    print(rgb)
-    print(ds.width, ds.height)
-    print(ds.bounds)
-    print(type(ds.bounds))
-
-    # Normaliza los valores de las bandas a 0-255
-    rgb = (rgb/rgb.max())*255
+    rgb = (rgb / rgb.max()) * 255
     rgb = rgb.astype(np.uint8)
 
-    # Copiar los metadatos del dataset original
     kwargs = ds.meta
     kwargs.update(
         dtype=rasterio.uint8,
@@ -29,10 +27,10 @@ def rgb(line, file, bands, rgb_name, pathOutput):
     
     # Guardar el compuesto RGB
     lineDir = line.split('/')[-1]
-    os.system('mkdir '+pathOutput+rgb_name+'/'+lineDir)
-    name = file.split('/')[-1].split('.')[0]+'_planet_' +rgb_name+'.tif'
-    with rasterio.open(os.path.join(pathOutput+rgb_name+'/'+lineDir, name), 'w', **kwargs) as dst:
-        dst.write(rgb.astype(rasterio.uint8))
+    os.makedirs(os.path.join(pathOutput, rgb_name, lineDir), exist_ok=True)
+    name = file.split('/')[-1].split('.')[0] + '_planet_' + rgb_name + '.tif'    
+    with rasterio.open(os.path.join(pathOutput, rgb_name, lineDir, name), 'w', **kwargs) as dst:
+        dst.write(rgb.transpose(2, 0, 1).astype(rasterio.uint8))
 
 # Funcion que crear los compuestos RGB de Planet
 def planetRGB(lines, bands, rgb_name, pathOutput):
