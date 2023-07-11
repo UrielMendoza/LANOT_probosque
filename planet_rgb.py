@@ -59,7 +59,7 @@ def rgb(line, file, bands, rgb_name, pathOutput):
         raise ValueError("Las dimensiones de las bandas no son consistentes")
     
     rgb = np.dstack((r , g , b))
-    rgb = (rgb / rgb.max()) * 255
+    #rgb = (rgb / rgb.max()) * 255
     rgb = rgb.astype(np.uint16)
     # Aplica una correccion gamma
     rgb = np.power(rgb, 1/2.2)
@@ -88,8 +88,8 @@ def planetRGB(lines, bands, rgb_name, pathOutput):
             print('Procesando: ' + file)
 
             # Crear compuesto RGB
-            #rgb(line, file, bands, rgb_name, pathOutput)
-            gdalRGB(line, file, bands, rgb_name, pathOutput)
+            rgb(line, file, bands, rgb_name, pathOutput)
+            #gdalRGB(line, file, bands, rgb_name, pathOutput)
 
 # Funncion principal
 def main():
