@@ -61,8 +61,7 @@ def rgb(line, file, bands, rgb_name, pathOutput):
     rgb = np.dstack((r , g , b))
     rgb = (rgb / rgb.max()) * 255
     rgb = rgb.astype(np.uint8)
-    # Aplica una correccion gamma
-    rgb = np.power(rgb, 1/2.2)
+    # Aplica un brillo 
 
     kwargs = ds.meta
     kwargs.update(
