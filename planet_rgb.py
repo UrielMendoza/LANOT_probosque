@@ -50,9 +50,9 @@ def gdalRGB(line, file, bands, rgb_name, pathOutput):
 # Funcion que crea los compuestos RGB con las bandas de Planet
 def rgb(line, file, bands, rgb_name, pathOutput):
     ds = rasterio.open(file)
-    r = ds.read(bands[0]) * 0.01
-    g = ds.read(bands[1]) * 0.01
-    b = ds.read(bands[2]) * 0.01
+    r = ds.read(bands[0])
+    g = ds.read(bands[1])
+    b = ds.read(bands[2])
     
     # Verificar y ajustar las dimensiones de las bandas si es necesario
     if r.shape != g.shape or r.shape != b.shape:
@@ -75,7 +75,7 @@ def rgb(line, file, bands, rgb_name, pathOutput):
     os.makedirs(os.path.join(pathOutput, rgb_name, lineDir), exist_ok=True)
     name = file.split('/')[-1].split('.')[0] + '_planet_' + rgb_name + '.tif'    
     with rasterio.open(os.path.join(pathOutput, rgb_name, lineDir, name), 'w', **kwargs) as dst:
-        dst.write(rgb.transpose(2, 0, 1).astype(rasterio.uint8))
+        dst.write(rgb.astype(rasterio.uint8))
 
 # Funcion que crear los compuestos RGB de Planet
 def planetRGB(lines, bands, rgb_name, pathOutput):
