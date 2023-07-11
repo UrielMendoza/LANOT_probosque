@@ -16,12 +16,12 @@ def rgb(line, file, bands, rgb_name, pathOutput):
         raise ValueError("Las dimensiones de las bandas no son consistentes")
     
     rgb = np.dstack((r , g , b))
-    rgb = (rgb / rgb.max()) * 255
-    rgb = rgb.astype(np.uint8)
+    #rgb = (rgb / rgb.max()) * 255
+    rgb = rgb.astype(np.uint16)
 
     kwargs = ds.meta
     kwargs.update(
-        dtype=rasterio.uint8,
+        dtype=rasterio.uint16,
         count=3,
         compress='lzw')
     
@@ -30,7 +30,7 @@ def rgb(line, file, bands, rgb_name, pathOutput):
     os.makedirs(os.path.join(pathOutput, rgb_name, lineDir), exist_ok=True)
     name = file.split('/')[-1].split('.')[0] + '_planet_' + rgb_name + '.tif'    
     with rasterio.open(os.path.join(pathOutput, rgb_name, lineDir, name), 'w', **kwargs) as dst:
-        dst.write(rgb.transpose(2, 0, 1).astype(rasterio.uint8))
+        dst.write(rgb.transpose(2, 0, 1).astype(rasterio.uint16))
 
 # Funcion que crear los compuestos RGB de Planet
 def planetRGB(lines, bands, rgb_name, pathOutput):
