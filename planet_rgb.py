@@ -73,9 +73,11 @@ def rgb(line, file, bands, rgb_name, pathOutput):
     # Guardar el compuesto RGB
     lineDir = line.split('/')[-1]
     os.makedirs(os.path.join(pathOutput, rgb_name, lineDir), exist_ok=True)
-    name = file.split('/')[-1].split('.')[0] + '_planet_' + rgb_name + '.tif'    
+    name = file.split('/')[-1].split('.')[0] + '_planet_' + rgb_name + '.tif'
+    
     with rasterio.open(os.path.join(pathOutput, rgb_name, lineDir, name), 'w', **kwargs) as dst:
-        dst.write(rgb.transpose(1, 2, 0).astype(rasterio.uint8))
+        dst.write(rgb.transpose(2, 0, 1).astype(rasterio.uint8))
+
 
 # Funcion que crear los compuestos RGB de Planet
 def planetRGB(lines, bands, rgb_name, pathOutput):
