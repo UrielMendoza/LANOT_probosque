@@ -7,9 +7,9 @@ import os
 # Funcion que crea los compuestos RGB con las bandas de Planet
 def rgb(line, file, bands, rgb_name, pathOutput):
     ds = rasterio.open(file)
-    r = ds.read(bands[0])
-    g = ds.read(bands[1])
-    b = ds.read(bands[2])
+    r = ds.read(bands[0]) * 0.01
+    g = ds.read(bands[1]) * 0.01
+    b = ds.read(bands[2]) * 0.01
     
     # Verificar y ajustar las dimensiones de las bandas si es necesario
     if r.shape != g.shape or r.shape != b.shape:
