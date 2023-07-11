@@ -4,6 +4,49 @@ import numpy as np
 #from xml.dom import minidom
 import os
 
+# Funcion que pasa a tif un ds de rasterio y un numpy array
+def toTif(name, array, ds, pathOutput):
+    kwargs = ds.meta
+    kwargs.update(
+        dtype=rasterio.uint16,
+        count=1,
+        compress='lzw')
+    
+    name = os.path.join(pathOutput, name + '.tif')
+    with rasterio.open(name, 'w', **kwargs) as dst:
+        dst.write_band(1, array.astype(rasterio.uint16))
+
+    return name
+
+# Funcion que crea el RGB con GDAL
+def gdalRGB(line, file, bands, rgb_name, pathOutput):
+    ds = rasterio.open(file)
+    r = ds.read(bands[0])
+    g = ds.read(bands[1])
+    b = ds.read(bands[2])    
+    
+    # Verificar y ajustar las dimensiones de las bandas si es necesario
+    if r.shape != g.shape or r.shape != b.shape:
+        raise ValueError("Las dimensiones de las bandas no son consistentes")
+    
+    # Convierte a tif cada banda
+    r_file = toTif('r', r, ds, './')
+    g_file = toTif('g', g, ds, './')
+    b_file = toTif('b', b, ds, './')
+    
+    # Guardar el compuesto RGB
+    lineDir = line.split('/')[-1]
+    os.makedirs(os.path.join(pathOutput, rgb_name, lineDir), exist_ok=True)
+    name = file.split('/')[-1].split('.')[0] + '_planet_' + rgb_name + '.tif'
+    
+    # Ejecutar el comando de gdal_merge
+    os.system('gdal_merge.py -separate -co PHOTOMETRIC=RGB -o '+name+' '+r_file+' '+g_file+' '+b_file)
+
+    # Borrar los archivos temporales
+    os.system('rm '+r_file+' '+g_file+' '+b_file)
+
+
+
 # Funcion que crea los compuestos RGB con las bandas de Planet
 def rgb(line, file, bands, rgb_name, pathOutput):
     ds = rasterio.open(file)
@@ -45,7 +88,8 @@ def planetRGB(lines, bands, rgb_name, pathOutput):
             print('Procesando: ' + file)
 
             # Crear compuesto RGB
-            rgb(line, file, bands, rgb_name, pathOutput)
+            #rgb(line, file, bands, rgb_name, pathOutput)
+            gdalRGB(line, file, bands, rgb_name, pathOutput)
 
 # Funncion principal
 def main():
