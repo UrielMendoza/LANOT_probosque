@@ -1,8 +1,11 @@
 /* Estilo general limpio */
 :root {
     /*Colores*/
-    --green_probosque-: #30a578;
-}
+    --dark_font: #1E1E1E;
+    --white: #FFFFFF;
+    --blue_probosque: #00A9E2;
+    --blue_probosque_hover: #0081B3;
+}   
 
 * {
     box-sizing: border-box;
@@ -15,8 +18,356 @@ html {
     font-family: 'Roboto', sans-serif;
 }
 
-.map {
+body {
+    font-size: 1.6rem;
+    background-color: var(--white);
+    /* Elimina el sobranete de la barra de desplazamiento */
+    overflow: hidden;
+}
+
+/* Estilo de ventana de inicio*/
+.inicio {
+    opacity: 1;
+    transition: opacity 1s ease-in-out;
+    width: 100vw; /* Anchura igual al 100% del viewport (pantalla) */
+    height: 100vh; /* Altura igual al 100% del viewport (pantalla) */
+    flex-shrink: 0;
+    background: url("../assets/img/background.JPG") center / cover no-repeat; /* Centra y ajusta la imagen de fondo */
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.inicio-titulo {
+    opacity: 1;
+    transition: opacity 1s ease-in-out;
+    position: relative; /* Añade posición relativa */
+    width: 1000px;
+    height: 250px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 75px;
+    background: rgba(255, 255, 255, 0.75);
+    padding: 35px;
+    margin: 0 auto 0; /* Centra horizontalmente y agrega un espacio en la parte superior */
+    top: 25px; /* Ajusta el desplazamiento vertical */
+}
+
+.inicio-titulo--letras {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.inicio-titulo h1 {
+    color: var(--dark_font);
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.inicio-titulo h2 {
+    color: var(--dark_font);
+    font-size: 18px;
+    margin-top: 10px;
+    font-weight: lighter;
+}
+
+.inicio-titulo h3 {
+    color: var(--blue_probosque);
+    font-size: 20px;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.inicio-titulo h4 {
+    color: var(--dark_font);
+    font-size: 12px;
+    margin-top: 35px;
+    font-weight: bold;
+}
+
+.inicio-logos {
+    opacity: 1;
+    transition: opacity 2s ease-in-out;
+    width: 659px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 25px;
+    margin: 25px auto 0;
+    top: 35px;
+}
+
+.inicio-logos span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    background: url("../assets/icons/elipse.svg") center / cover no-repeat;
+    margin-right: 25px;
+}
+
+.inicio-logos span:hover {
+    cursor: pointer;
+    opacity: 0.5;
+    /* Aumenta lijeraente el tamaño del icono */
+    transform: scale(1.1);
+}
+
+.inicio-logos .grupo1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    margin-bottom: 10px;
+}
+
+.inicio-logos .grupo2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.inicio-logos img {
+    width: 80px;
+    height: 80px;
+}
+
+.inicio-boton {
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    width: 200px;
+    height: 150px;
+    flex-shrink: 0;
+    /* Centra el boton en la pantalla */
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    margin-top: 50px;
+}
+
+.inicio-boton button {
+    width: 150px;
+    height: 50px;
+    flex-shrink: 0;
+    color: var(--white);
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 400;
+    border-radius: 75px;
+    background: var(--blue_probosque);
+    /* Elimina el borde del boton */
+    border: none;
+    /* Añade sombra al boton */
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.inicio-boton button:hover {
+    cursor: pointer;
+    background: var(--blue_probosque_hover);
+    transform: scale(1.1);
+}
+
+.mapa-container {
+    display: flex;
     height: 100vh;
+}
+
+.menu-container {
+    width: 350px; /* Ancho del menú */
+    background: var(--dark_font);
+    /* Añade sombra al menú */
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    transition: opacity 1s ease-in-out;
+    /* Tipo de letra del menú */
+    font-family: 'Roboto', sans-serif;
+    color: var(--white);
+    padding: 2rem;
+    /* Tamaño vertical ajustado a la pantalla */
+    height: 100vh;
+    /* Añade scroll al menú */
+    overflow-y: auto;
+    /* Cambia el diseño del scroll */
+    scrollbar-width: thin;
+    scrollbar-color: var(--blue_probosque) var(--dark_font);
+}
+
+.menu {
     width: 100%;
+    /* Estilos del menú lateral */
+}
+
+.capas-lista {
+    /* Espaciado entre los divs */
+    margin-bottom: 1rem;
+    /* Opacidad solo del background */
+    background: var(--blue_probosque);
+    opacity: 0.8;
+    border-radius: 2rem;
+    padding: 2rem;
+}
+
+.capas-lista-titulo {
+    /* Pone los elemntos en una sola linea */
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.capas-lista-titulo h1 {
+    /* Estilos de los títulos de las capas */
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.capas-lista-icono {
+    /* Estilos de los iconos de las capas */
+    height: 3rem;
+    float: left;
+    margin-right: 1rem;
+    margin: 1rem;
+}
+
+.capas-lista-elemento {
+    /* Estilos de los elementos de las capas */
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+/* Estilizar el checkbox */
+.capas-lista-elemento input[type="checkbox"] {
+    /* Ocultar el checkbox predeterminado */
+    display: none;
+}
+
+/* Estilo personalizado para el checkbox */
+.capas-lista-elemento input[type="checkbox"] + label {
+    position: relative;
+    padding-left: 30px; /* Espacio para el checkbox personalizado */
+    cursor: pointer;
+}
+
+/* Estilo para el indicador del checkbox personalizado */
+.capas-lista-elemento input[type="checkbox"] + label:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 2px;
+    width: 15px;
+    height: 15px;
+    border: 2px solid var(--white); /* Color del borde */
+    border-radius: 5px; /* Hace que el indicador sea redondeado */
+}
+
+/* Estilo para el indicador del checkbox personalizado cuando está marcado */
+.capas-lista-elemento input[type="checkbox"]:checked + label:before {
+    background-color: var(--white); /* Color del indicador cuando está marcado */
+}
+
+.capas-lista-logos {
+    /* Estilos de los logos de las capas */
+    margin-bottom: 2rem;
+    /* Opacidad solo del background */
+    background: var(--white);
+    opacity: 0.5;
+    border-radius: 2rem;
+    padding: 1rem;
+}
+
+.capas-lista-logos .grupo1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.capas-lista-logos .grupo2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.capas-lista-logos img {
+    width: 60px;
+    height: 60px;
+}
+
+.capas-lista-logos span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: url("../assets/icons/elipse.svg") center / cover no-repeat;
+    margin-right: 25px;
+}
+
+.capas-lista-logos span:hover {
+    cursor: pointer;
+    opacity: 0.5;
+    /* Aumenta lijeraente el tamaño del icono */
+    transform: scale(1.1);
+}
+
+#map {
+    flex: 1; /* El mapa ocupará el espacio restante */
+}
+
+#mapa-titulo {
+    opacity: 0;
+    font-family: 'Roboto', sans-serif;
+    color: var(--dark_font);
+    background: var(--white);
+    border-radius: 2rem;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    padding: 10px;
+    margin: 0;
+    z-index: 1000;
+}
+
+#mapa-simbologia {
+    /* Posicionado en la esquina inferior derecha */
+    opacity: 0;
+    position: absolute;
+    bottom: 40px;
+    right: 30px;
+    z-index: 1000;
+    /* Opacidad solo del background */
+    background: none;
+    opacity: 0.75;
+    border-radius: 2rem;
+    padding: 1rem;
+}
+
+#mapa-simbologia img {
+    opacity: 0;
+    width: 300px;
+    height: 220px;
+    margin-bottom: 10px;
+}
+
+#busqueda {
+    /* Pocisiona el buiscador abajo y centrado */
+    /* Estilos de los elementos de las capas */
+    position: relative;
+    bottom: 0;
+    left: -50%;
+    padding-top: 40%;
+
 }
 

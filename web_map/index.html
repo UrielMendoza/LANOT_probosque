@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PROBOSQUE Cambio Cobertura Arbórea 2015-2022</title>
+    <title>WWF-IGG-PROBOSQUE Cambio Cobertura Arbórea 2015-2022.</title>
 
     <!-- Favicon -->
     <!-- <link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" /> -->
@@ -12,101 +12,208 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
+    <!-- JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
     <!-- Mapa -->
     <!-- <script src="./js/main.js"></script> -->
 
     <!-- Estilo -->
-    <!-- <link rel="stylesheet" href="./css/style.css"> -->
-
-    <style>
-        /* Estilo general limpio */
-        :root {
-            /*Colores*/
-            --green_probosque-: #30a578;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        html {
-            font-size: 62.5%;
-            font-family: 'Roboto', sans-serif;
-        }
-
-        /* Mapa tamaño completo*/
-        #map {
-            height: 100vh;
-            width: 100vw;
-        }
-
-    </style>
-    
+    <link rel="stylesheet" href="./css/style.css"> 
 
 </head>
 <body>
+
+    <!-- Pagina Inicio -->
+    <section class="inicio" id="inicio">
+        <!-- Titulos -->
+        <div class="inicio-titulo">
+            <div class="inicio-titulo--letras">
+                <h1>WORLD WILDLIFE FUND.</h1>
+                <h1>SECRETARÍA DEL MEDIO AMBIENTE.</h1>
+                <h1>PROTECTORA DE BOSQUES DEL ESTADO DE MÉXICO.</h1>
+                <h2>Dirección de Restauración y Fomento Forestal.</h2>
+                <h3>CUANTIFICACIÓN DE CAMBIOS EN LA COBERTURA ARBÓREA Y EN EL USO DEL SUELO EN LOS ECOSITEMAS FORESTALES DEL ESTADO DE MÉXICO ENTRE LOS AÑOS 2015 Y 2022.</h3>
+                <h4>Convenio entre el Instituto de Geografía UNAM, World Wildlife Fund y PROBOSQUE.</h4>
+            </div>
+        </div>        
+        <!-- Logos -->
+        <div class="inicio-logos">
+            <div class="grupo1">
+                <span>
+                    <img src="./assets/icons/igg_logo.png" alt="igg_logo">
+                </span>
+                <span>
+                    <img src="./assets/icons/unam.png" alt="unam">
+                </span>
+            </div>
+            <div class="grupo2">
+                <span>
+                    <img src="./assets/icons/wwf.png" alt="wwf">
+                </span>
+                <span>
+                    <img src="./assets/icons/edomex.png" alt="edomex">
+                </span>
+                <span>
+                    <img src="./assets/icons/logoProbosque.png" alt="logoProbosque">
+                </span>
+            </div>
+        </div>
+        <!-- Boton -->
+        <div class="inicio-boton" id="btn-inicio-container">
+            <button id="btn-inicio">Iniciar</button>
+        </div>
+    </section>
+
+
+    <!-- Principal -->
+    <section class="mapa-container">
+
+        <div class="menu-container">
+            <!-- Panel de capas -->
+            <aside class="menu" id="menu">
+
+                <!-- Contenido del menú capas-->
+                <div class="capas-lista">
+                    <div class="capas-lista-titulo">
+                        <img class="capas-lista-icono" src="./assets/icons/layers.svg" alt="layers">
+                        <h1>Capas.</h1>
+                    </div>                    
+                    <!-- Lista de capas -->
+                    <div class="capas-lista-elemento">
+                        <input type="checkbox" id="capa1" name="capa1" value="capa1" checked>
+                        <label for="capa1">Cobertura Arbórea 2022.<br>Edo. México.</label>
+                        <span>
+                            <img src="" alt="">
+                        </span>
+                    </div>
+                    <div class="capas-lista-elemento">
+                        <input type="checkbox" id="capa2" name="capa2" value="capa2" checked>
+                        <label for="capa2">Sombra IGECEM2.</label>
+                        <span>
+                            <img src="" alt="">
+                        </span>
+                    </div>
+                    <div class="capas-lista-elemento">
+                        <input type="checkbox" id="capa3" name="capa3" value="capa3" checked>
+                        <label for="capa3">Entidades 2022.</label>
+                        <span>
+                            <img src="" alt="">
+                        </span>
+                    </div>
+                    <div class="capas-lista-titulo">
+                        <img class="capas-lista-icono" src="./assets/icons/rgb.svg" alt="layers">
+                        <h1>Planet RGBs.</h1>
+                    </div>   
+                    <!-- Lista de capas -->
+                    <div class="capas-lista-elemento">
+                        <input type="checkbox" id="capa4" name="capa4" value="capa4" >
+                        <label for="capa4">Color Verdadero.</label>
+                        <span>
+                            <img src="" alt="">
+                        </span>
+                    </div>
+                    <div class="capas-lista-elemento">
+                        <input type="checkbox" id="capa5" name="capa5" value="capa5" >
+                        <label for="capa5">Falso Color.</label>
+                        <span>
+                            <img src="" alt="">
+                        </span>
+                    </div>
+                    <div class="capas-lista-elemento">
+                        <input type="checkbox" id="capa6" name="capa6" value="capa6" >
+                        <label for="capa6">NIR Color.</label>
+                        <span>
+                            <img src="" alt="">
+                        </span>
+                    </div>
+<!--                     <div class="capas-lista-titulo">
+                        <img class="capas-lista-icono" src="./assets/icons/mapabase.svg" alt="layers">
+                        <h1>Mapas base.</h1>
+                    </div>  
+                    <div class="capas-lista-elemento">
+                        <input type="checkbox" id="capa1" name="capa1" value="capa1" checked>
+                        <label for="capa1">Cobertura Arbórea 2015</label>
+                        <span>
+                            <img src="" alt="">
+                        </span>
+                    </div> -->
+
+                </div>
+
+                <!-- Contenido de la consulta-->
+                <div class="capas-lista">
+                    <div class="capas-lista-titulo">
+                        <img class="capas-lista-icono" src="./assets/icons/search.svg" alt="layers">
+                        <h1>Consulta.</h1>
+                        <!-- Panel de seleccion de categoria de cobertura-->
+                        <div id="busqueda" class="busqueda">
+                            <label for="categoria" id="categoria">Categoria</label>
+                            <select id="cobertura">
+                                <option value="">Todos.</option>
+                                <option value="'CUERPO DE AGUA'">Cuerpo de agua.</option>
+                                <option value="'ASENTAMIENTO HUMANO'">Asentamiento humano.</option>
+                                <option value="'AGRICULTURA'">Agricultura.</option>
+                                <option value="'PASTIZAL'">Pastizal.</option>
+                                <option value="'MATORRAL'">Matorral.</option>
+                                <option value="'BOSQUE CON MENOS DE 30 % DE COBERTURA'">Bosque con menos de 30% de cobertura.</option>
+                                <option value="'BOSQUE CON ENTRE 30 Y 60 % DE COBERTURA'">Bosque entre de 30% y 60% de cobertura.</option>
+                                <option value="'BOSQUE CON MAS DE 60 % DE COBERTURA'">Bosque con más de 60% de cobertura.</option>
+                                <option value="'SELVA CON MENOS DE 20 % DE COBERTURA'">Selva con menos de 20% de cobertura.</option>
+                                <option value="'SELVA CON MAS DE 20 % DE COBERTURA'">Selva con más de 20% de cobertura.</option>
+                                <option value="'HUMEDAL'">Humedal.</option>
+                                <option value="'SIN VEGETACION APARENTE'">Sin vegetación aparente.</option>
+                            </select>
+<!--                             <div align="center"><input type="submit" value="Ejecutar" class="botton-ejecutar" id="ejecutar"/></div> -->
+                            <br>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Seccion de logos-->
+                <div class="capas-lista-logos">
+                    <div class="grupo1">
+                        <span>
+                            <img src="./assets/icons/igg_logo.png" alt="igg_logo">
+                        </span>
+                        <span>
+                            <img src="./assets/icons/unam.png" alt="unam">
+                        </span>
+                    </div>
+                    <div class="grupo2">
+                        <span>
+                            <img src="./assets/icons/wwf.png" alt="wwf">
+                        </span>
+                        <span>
+                            <img src="./assets/icons/edomex.png" alt="edomex">
+                        </span>
+                        <span>
+                            <img src="./assets/icons/logoProbosque.png" alt="logoProbosque">
+                        </span>
+                    </div>                    
+                </div>
+
+            </aside>
+        </div>  
+
+
+        <!-- Mapa Tiulo -->
+        <div id="mapa-titulo">WWF-IGG-PROBOSQUE Cambio Cobertura Arbórea 2015-2022.</div>
+        <!-- Simbologia -->
+        <div id="mapa-simbologia">
+            <img id="mapa-simbologia-img" src="./assets/icons/simbologia.png" alt="igg">
+        </div>
+
+        <!-- Popup -->
+        <div id="popup"></div>
+
+        <!-- Mapa -->
+        <div id="map"></div>
+
+    </section>
     
-    <!-- Mapa -->
-    <div id="map"></div>
-
-    <script>
-
-        // Mapa
-        const map = L.map('map').setView([19.3, -99.5], 9);
-        
-        // Capa de OSM
-        const osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        }).addTo(map);
-        
-        // Capas WMS
-        const wms = 'http://132.247.103.145:8080/geoserver/probosque/wms?service=WMS'
-
-        var spot_ndvi_2015 = L.tileLayer.wms(wms, {
-            layers: 'probosque:spot_ndvi_2015'
-        })
-
-        var planet_ndvi_2022 = L.tileLayer.wms(wms, {
-            layers: 'probosque:planet_ndvi_2022'
-        }).addTo(map)
-
-        var spot_planet_dndvi = L.tileLayer.wms(wms, {
-            layers: 'probosque:spot_planet_dndvi'
-        })
-
-        var spot_planet_dndvi_1sd = L.tileLayer.wms(wms, {
-            layers: 'probosque:spot_planet_dndvi_1sd'
-        })
-
-        var spot_planet_dndvi_2sd = L.tileLayer.wms(wms, {
-            layers: 'probosque:spot_planet_dndvi_2sd'
-        })
-
-        var spot_planet_dndvi_3sd = L.tileLayer.wms(wms, {
-            layers: 'probosque:spot_planet_dndvi_3sd'
-        })
-
-        // Control de capas
-        var baseMaps = {
-            "OSM": osm
-        };
-        var overlays = {
-        "Spot NDVI 2015": spot_ndvi_2015,
-        "Planet NDVI 2022": planet_ndvi_2022,
-        "Spot-Planet DNDVI": spot_planet_dndvi,
-        "Spot-Planet DNDVI 1 SD": spot_planet_dndvi_1sd,
-        "Spot-Planet DNDVI 2 SD": spot_planet_dndvi_2sd,
-        "Spot-Planet DNDVI 3 SD": spot_planet_dndvi_3sd
-        };
-
-        // Crear el controlador de capas y agregarlo al mapa
-        L.control.layers(baseMaps, overlays).addTo(map);
-
-    </script>
-    
+    <!-- Script -->
+    <script src="./js/main.js"></script>
 
 </body>
 </html>

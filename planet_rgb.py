@@ -59,9 +59,13 @@ def rgb(line, file, bands, rgb_name, pathOutput):
         raise ValueError("Las dimensiones de las bandas no son consistentes")
     
     rgb = np.dstack((r , g , b))
-    rgb = (rgb / rgb.max()) * 255
+    # Normalizar el array para que sea RGB
+    rgb = rgb / rgb.max()
     rgb = rgb.astype(np.uint8)
-    # Aplica un brillo 
+    # Los valores nodata se convierten a 0
+    rgb[rgb == np.nan] = 0
+    # Aplica un brillantez de 1.5
+    rgb = rgb * 1.5
 
     kwargs = ds.meta
     kwargs.update(
