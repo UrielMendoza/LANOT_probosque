@@ -111,6 +111,23 @@ window.addEventListener('DOMContentLoaded', function() {
             edomex_2022.setParams({ CQL_FILTER: cqlFilter });
         });
 
+        var edomex_2015 = L.tileLayer.wms(wms, {
+            layers: 'probosque:edomex_2015',
+            transparent: true,
+            format: 'image/png',
+            zindex: 5
+        });
+
+        //const select_2015 = document.getElementById('cobertura_2015');
+
+        //select_2015.addEventListener('change', function () {
+        //    const selectedValue = this.value;
+        //    const cqlFilter = "clase_2015 = " + selectedValue; // Reemplaza "atributo_de_la_capa" con el nombre del atributo en tu capa WMS
+        
+            // Actualizar el parámetro CQL_FILTER de la capa WMS
+        //    edomex_2015.setParams({ CQL_FILTER: cqlFilter });
+        //});
+
         var sombra_igecem2 = L.tileLayer.wms(wms, {
             layers: 'probosque:sombra_igecem2',
             transparent: true,
@@ -185,11 +202,12 @@ window.addEventListener('DOMContentLoaded', function() {
 
         // Activacion y desactivacion de capas
         toggleLayer('capa1', edomex_2022);
-        toggleLayer('capa2', sombra_igecem2);
-        toggleLayer('capa3', entidades);
-        toggleLayer('capa4', planet_true_color);
-        toggleLayer('capa5', planet_false_color);
-        toggleLayer('capa6', planet_nir_color);
+        toggleLayer('capa2', edomex_2015);
+        toggleLayer('capa3', sombra_igecem2);
+        toggleLayer('capa4', entidades);
+        toggleLayer('capa5', planet_true_color);
+        toggleLayer('capa6', planet_false_color);
+        toggleLayer('capa7', planet_nir_color);
 /*         toggleLayer('capa7', spot_ndvi_2015); 
         toggleLayer('capa8', planet_ndvi_2022);
         toggleLayer('capa9', spot_planet_dndvi);
