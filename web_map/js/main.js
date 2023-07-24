@@ -92,6 +92,8 @@ window.addEventListener('DOMContentLoaded', function() {
             checkbox.addEventListener('change', function () {
                 if (this.checked) {
                     wmsLayer.addTo(map);
+                    /* Pone la capa al frente de las demas */
+                    wmsLayer.bringToFront();
                 } else {
                     map.removeLayer(wmsLayer);
                 }
