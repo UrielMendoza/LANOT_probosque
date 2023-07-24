@@ -48,7 +48,7 @@ window.addEventListener('DOMContentLoaded', function() {
         const map = L.map('map', {
         }).setView([19.3, -99.5], 9);
         
-        // Tiles
+        // Tiles hasta detras de las capas
         const cartodb = L.tileLayer('https://cartodb-basemaps-a.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png', {
             maxZoom: 19,
             attribution: '&copy; <a href="https://cartodb-basemaps-a.global.ssl.fastly.net">cartoDB</a>',
@@ -61,23 +61,28 @@ window.addEventListener('DOMContentLoaded', function() {
         });
         const osm = L.tileLayer('http://a.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
-            attribution: '&copy; <a href="http://a.tile.openstreetmap.org">OSM</a>'
+            attribution: '&copy; <a href="http://a.tile.openstreetmap.org">OSM</a>',
+            zindex: -1
         });
         const ESRI_satelital = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
             maxZoom: 19,
-            attribution: '&copy; <a href="https://server.arcgisonline.com">ESRI</a>'
+            attribution: '&copy; <a href="https://server.arcgisonline.com">ESRI</a>',
+            zindex: -1
         });
         const ESRI_topo = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
             maxZoom: 19,
-            attribution: '&copy; <a href="https://server.arcgisonline.com">ESRI</a>'
+            attribution: '&copy; <a href="https://server.arcgisonline.com">ESRI</a>',
+            zindex: -1
         });
         const googlemaps = L.tileLayer('https://mt1.google.com/vt/lyrs=r&x={x}&y={y}&z={z}', {
             maxZoom: 19,
-            attribution: '&copy; <a href="https://mt1.google.com">GoogleMaps</a>'
+            attribution: '&copy; <a href="https://mt1.google.com">GoogleMaps</a>',
+            zindex: -1
         });
         const googlemaps_satelital = L.tileLayer('http://www.google.cn/maps/vt?lyrs=s@189&gl=cn&x={x}&y={y}&z={z}', {
             maxZoom: 19,
-            attribution: '&copy; <a href="https://mt1.google.com">GoogleMaps</a>'
+            attribution: '&copy; <a href="https://mt1.google.com">GoogleMaps</a>',
+            zindex: -1
         });
         
         // Controlador de eventos para el checkbox
