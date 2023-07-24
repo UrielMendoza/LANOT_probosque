@@ -352,12 +352,31 @@ body {
     opacity: 0.75;
     border-radius: 2rem;
     padding: 1rem;
+    /* Acomoda los elementos en columna */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* Añade scroll al menú */
+    overflow-y: auto;
+    /* Cambia el diseño del scroll */
+    scrollbar-width: thin;
+    scrollbar-color: var(--blue_probosque) var(--dark_font);
 }
 
+/* Pone la primera imagen de la simbología */
 #mapa-simbologia img {
     opacity: 0;
     width: 300px;
     height: 220px;
+    margin-bottom: 10px;
+}
+
+/* Pone la segunda imagen de la simbología */
+#mapa-simbologia img:nth-child(2) {
+    opacity: 0;
+    width: 300px;
+    height: 80px;
     margin-bottom: 10px;
 }
 

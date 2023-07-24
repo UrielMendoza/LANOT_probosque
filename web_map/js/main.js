@@ -11,7 +11,8 @@ window.addEventListener('DOMContentLoaded', function() {
     var menu = document.getElementById('menu');
     var mapaTitulo = document.getElementById('mapa-titulo');
     var mapaSimbologia = document.getElementById('mapa-simbologia');
-    var mapaSimbologiaImg = document.getElementById('mapa-simbologia-img');
+    var mapaSimbologiaImg_1 = document.getElementById('mapa-simbologia-img_1');
+    var mapaSimbologiaImg_2 = document.getElementById('mapa-simbologia-img_2');
 
     // Mostrar el título y los logos después de 1 segundo
     setTimeout(function() {
@@ -30,7 +31,8 @@ window.addEventListener('DOMContentLoaded', function() {
         mapaContainer.style.opacity = '1';
         mapaTitulo.style.opacity = '0.75';
         mapaSimbologia.style.background = 'var(--white)';
-        mapaSimbologiaImg.style.opacity = '1';
+        mapaSimbologiaImg_1.style.opacity = '1';
+        mapaSimbologiaImg_2.style.opacity = '0.85';
 
         var mapContainer = document.getElementById('map');
         mapContainer.style.height = (window.innerHeight - 20) + 'px'; // Ajusta el tamaño del mapa
@@ -113,6 +115,13 @@ window.addEventListener('DOMContentLoaded', function() {
 
         var edomex_2015 = L.tileLayer.wms(wms, {
             layers: 'probosque:edomex_2015',
+            transparent: true,
+            format: 'image/png',
+            zindex: 5
+        });
+
+        var edomex_2015_2022 = L.tileLayer.wms(wms, {
+            layers: 'probosque:edomex_2015_2022',
             transparent: true,
             format: 'image/png',
             zindex: 5
@@ -203,11 +212,12 @@ window.addEventListener('DOMContentLoaded', function() {
         // Activacion y desactivacion de capas
         toggleLayer('capa1', edomex_2022);
         toggleLayer('capa2', edomex_2015);
-        toggleLayer('capa3', sombra_igecem2);
-        toggleLayer('capa4', entidades);
-        toggleLayer('capa5', planet_true_color);
-        toggleLayer('capa6', planet_false_color);
-        toggleLayer('capa7', planet_nir_color);
+        toggleLayer('capa3', edomex_2015_2022);
+        toggleLayer('capa4', sombra_igecem2);
+        toggleLayer('capa5', entidades);
+        toggleLayer('capa6', planet_true_color);
+        toggleLayer('capa7', planet_false_color);
+        toggleLayer('capa8', planet_nir_color);
 /*         toggleLayer('capa7', spot_ndvi_2015); 
         toggleLayer('capa8', planet_ndvi_2022);
         toggleLayer('capa9', spot_planet_dndvi);
