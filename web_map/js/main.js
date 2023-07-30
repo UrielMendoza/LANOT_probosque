@@ -11,8 +11,9 @@ window.addEventListener('DOMContentLoaded', function() {
     var menu = document.getElementById('menu');
     var mapaTitulo = document.getElementById('mapa-titulo');
     var mapaSimbologia = document.getElementById('mapa-simbologia');
-    var mapaSimbologiaImg_1 = document.getElementById('mapa-simbologia-img_1');
-    var mapaSimbologiaImg_2 = document.getElementById('mapa-simbologia-img_2');
+    //var mapaSimbologiaImg_1 = document.getElementById('mapa-simbologia-img_1');
+    //var mapaSimbologiaImg_2 = document.getElementById('mapa-simbologia-img_2');
+    var mapaSimbologiaImg = document.getElementById('mapa-simbologia-img');
 
     // Mostrar el título y los logos después de 1 segundo
     setTimeout(function() {
@@ -31,8 +32,12 @@ window.addEventListener('DOMContentLoaded', function() {
         mapaContainer.style.opacity = '1';
         mapaTitulo.style.opacity = '0.75';
         mapaSimbologia.style.background = 'var(--white)';
-        mapaSimbologiaImg_1.style.opacity = '1';
-        mapaSimbologiaImg_2.style.opacity = '0.85';
+        mapaSimbologiaImg.style.opacity = '1';
+        //mapaSimbologiaImg_1.style.opacity = '1';
+        //mapaSimbologiaImg_2.style.opacity = '0.85';
+
+        // Activa la simbologia de la capa 1
+        mapaSimbologiaImg.src = './assets/icons/simbologia.png';
 
         var mapContainer = document.getElementById('map');
         mapContainer.style.height = (window.innerHeight - 20) + 'px'; // Ajusta el tamaño del mapa
@@ -88,19 +93,33 @@ window.addEventListener('DOMContentLoaded', function() {
         // Controlador de eventos para el checkbox
         function toggleLayer(checkboxId, wmsLayer) {
             const checkbox = document.getElementById(checkboxId);
-
+        
             checkbox.addEventListener('change', function () {
                 if (this.checked) {
                     wmsLayer.addTo(map);
                     /* Pone la capa al frente de las demas */
                     wmsLayer.bringToFront();
+                    mapaSimbologiaImg.style.opacity = '1';
+
+                    // Controlador de simbologia al activar la capa
+                    if (checkboxId == 'capa1') {
+                        mapaSimbologiaImg.src = './assets/icons/simbologia.png';
+                    } else if (checkboxId == 'capa2') {
+                        mapaSimbologiaImg.src = './assets/icons/simbologia.png';
+                    } else if (checkboxId == 'capa3') {
+                        mapaSimbologiaImg.src = './assets/icons/simbologia_cambio.png';
+                    } else if (checkboxId == 'capa4') {
+                        mapaSimbologiaImg.src = './assets/icons/simbologia_vegdominante.png';
+                    } else {
+                        mapaSimbologiaImg.src = '';
+                    }
                 } else {
                     map.removeLayer(wmsLayer);
+                    mapaSimbologiaImg.style.opacity = '0';
                 }
             });
         }
-
-        // Controlador de simbologia al activar la capa
+              
 
         // Capas WMS
         const wms = 'http://132.247.103.145:8080/geoserver/probosque/wms'
