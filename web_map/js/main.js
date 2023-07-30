@@ -100,6 +100,8 @@ window.addEventListener('DOMContentLoaded', function() {
             });
         }
 
+        // Controlador de simbologia al activar la capa
+
         // Capas WMS
         const wms = 'http://132.247.103.145:8080/geoserver/probosque/wms'
 
@@ -129,6 +131,13 @@ window.addEventListener('DOMContentLoaded', function() {
 
         var edomex_2015_2022 = L.tileLayer.wms(wms, {
             layers: 'probosque:edomex_2015_2022',
+            transparent: true,
+            format: 'image/png',
+            zindex: 5
+        });
+
+        var edomex_veg_dominante = L.tileLayer.wms(wms, {
+            layers: 'probosque:edomex_veg_dominante',
             transparent: true,
             format: 'image/png',
             zindex: 5
@@ -220,11 +229,12 @@ window.addEventListener('DOMContentLoaded', function() {
         toggleLayer('capa1', edomex_2022);
         toggleLayer('capa2', edomex_2015);
         toggleLayer('capa3', edomex_2015_2022);
-        toggleLayer('capa4', sombra_igecem2);
-        toggleLayer('capa5', entidades);
-        toggleLayer('capa6', planet_true_color);
-        toggleLayer('capa7', planet_false_color);
-        toggleLayer('capa8', planet_nir_color);
+        toggleLayer('capa4', edomex_veg_dominante);
+        toggleLayer('capa5', sombra_igecem2);
+        toggleLayer('capa6', entidades);
+        toggleLayer('capa7', planet_true_color);
+        toggleLayer('capa8', planet_false_color);
+        toggleLayer('capa9', planet_nir_color);
 /*         toggleLayer('capa7', spot_ndvi_2015); 
         toggleLayer('capa8', planet_ndvi_2022);
         toggleLayer('capa9', spot_planet_dndvi);
