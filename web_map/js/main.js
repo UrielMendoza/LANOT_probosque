@@ -57,37 +57,37 @@ window.addEventListener('DOMContentLoaded', function() {
         const cartodb = L.tileLayer('https://cartodb-basemaps-a.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png', {
             maxZoom: 19,
             attribution: '&copy; <a href="https://cartodb-basemaps-a.global.ssl.fastly.net">cartoDB</a>',
-            zindex: -1
+            zindex: 0
         }).addTo(map);
         const cartodb_dark = L.tileLayer('http://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
             maxZoom: 19,
             attribution: '&copy; <a href="http://a.basemaps.cartocdn.com/">cartoDB</a>',
-            zindex: -1
+            zindex: 0
         });
         const osm = L.tileLayer('http://a.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
             attribution: '&copy; <a href="http://a.tile.openstreetmap.org">OSM</a>',
-            zindex: -1
+            zindex: 0
         });
         const ESRI_satelital = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
             maxZoom: 19,
             attribution: '&copy; <a href="https://server.arcgisonline.com">ESRI</a>',
-            zindex: -1
+            zindex: 0
         });
         const ESRI_topo = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
             maxZoom: 19,
             attribution: '&copy; <a href="https://server.arcgisonline.com">ESRI</a>',
-            zindex: -1
+            zindex: 0
         });
         const googlemaps = L.tileLayer('https://mt1.google.com/vt/lyrs=r&x={x}&y={y}&z={z}', {
             maxZoom: 19,
             attribution: '&copy; <a href="https://mt1.google.com">GoogleMaps</a>',
-            zindex: -1
+            zindex: 0
         });
         const googlemaps_satelital = L.tileLayer('http://www.google.cn/maps/vt?lyrs=s@189&gl=cn&x={x}&y={y}&z={z}', {
             maxZoom: 19,
             attribution: '&copy; <a href="https://mt1.google.com">GoogleMaps</a>',
-            zindex: -1
+            zindex: 0
         });
         
         // Controlador de eventos para el checkbox
@@ -100,6 +100,10 @@ window.addEventListener('DOMContentLoaded', function() {
                     /* Pone la capa al frente de las demas */
                     wmsLayer.bringToFront();
                     mapaSimbologiaImg.style.opacity = '1';
+
+                    // Pone la capa de sombras al frente de las demas
+                    sombra_igecem2.bringToFront();
+                    entidades.bringToFront();
 
                     // Controlador de simbologia al activar la capa
                     if (checkboxId == 'capa1') {
@@ -136,9 +140,16 @@ window.addEventListener('DOMContentLoaded', function() {
         select.addEventListener('change', function () {
             const selectedValue = this.value;
             const cqlFilter = "clase_2022 = " + selectedValue; // Reemplaza "atributo_de_la_capa" con el nombre del atributo en tu capa WMS
-        
+            
+            // Si el valor es "todos", pone todas las categorías
+            if (selectedValue == 'todos') {
+            // Actualizar el parámetro CQL_FILTER de la capa WMS
+            edomex_2022.setParams({ CQL_FILTER: null });
+            }
+            else {
             // Actualizar el parámetro CQL_FILTER de la capa WMS
             edomex_2022.setParams({ CQL_FILTER: cqlFilter });
+            }
         });
 
         var edomex_2015 = L.tileLayer.wms(wms, {
@@ -152,14 +163,16 @@ window.addEventListener('DOMContentLoaded', function() {
             layers: 'probosque:edomex_2015_2022',
             transparent: true,
             format: 'image/png',
-            zindex: 5
+            zindex: 5,
+            opacity: 0.75
         });
 
         var edomex_veg_dominante = L.tileLayer.wms(wms, {
             layers: 'probosque:edomex_veg_dominante',
             transparent: true,
             format: 'image/png',
-            zindex: 5
+            zindex: 5,
+            opacity: 0.5
         });
 
         //const select_2015 = document.getElementById('cobertura_2015');
@@ -177,6 +190,7 @@ window.addEventListener('DOMContentLoaded', function() {
             transparent: true,
             format: 'image/png',
             opacity: 0.25,
+            // Siempre esta por encima de las demas
             zindex: 10
         }).addTo(map);
 
@@ -241,8 +255,13 @@ window.addEventListener('DOMContentLoaded', function() {
             layers: 'probosque:entidades',
             transparent: true,
             format: 'image/png',
+            // Siempre esta por encima de las demas
             zindex: 10
         }).addTo(map);
+
+        // Pone al frente la capa de entidades y la sombra
+        entidades.bringToFront();
+        sombra_igecem2.bringToFront();
 
         // Activacion y desactivacion de capas
         toggleLayer('capa1', edomex_2022);

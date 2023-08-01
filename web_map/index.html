@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WWF-IGG-PROBOSQUE Cambio Cobertura Arbórea 2015-2022.</title>
+    <title>WWF-IGG-PROBOSQUE Cambio Cobertura Vegetal 2015-2022.</title>
 
     <!-- Favicon -->
     <!-- <link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" /> -->
@@ -33,7 +33,7 @@
                 <h1>SECRETARÍA DEL MEDIO AMBIENTE.</h1>
                 <h1>PROTECTORA DE BOSQUES DEL ESTADO DE MÉXICO.</h1>
                 <h2>Dirección de Restauración y Fomento Forestal.</h2>
-                <h3>CUANTIFICACIÓN DE CAMBIOS EN LA COBERTURA ARBÓREA Y EN EL USO DEL SUELO EN LOS ECOSISTEMAS FORESTALES DEL ESTADO DE MÉXICO ENTRE LOS AÑOS 2015 Y 2022.</h3>
+                <h3>CUANTIFICACIÓN DE CAMBIOS EN LA COBERTURA VEGETAL Y EN EL USO DEL SUELO EN LOS ECOSISTEMAS FORESTALES DEL ESTADO DE MÉXICO ENTRE LOS AÑOS 2015 Y 2022.</h3>
                 <h4>Convenio entre el Instituto de Geografía UNAM, World Wildlife Fund y PROBOSQUE.</h4>
             </div>
         </div>        
@@ -73,6 +73,29 @@
             <!-- Panel de capas -->
             <aside class="menu" id="menu">
 
+                <!-- Seccion de logos-->
+                <div class="capas-lista-logos">
+                    <div class="grupo1">
+                        <span>
+                            <img src="./assets/icons/igg_logo.png" alt="igg_logo">
+                        </span>
+                        <span>
+                            <img src="./assets/icons/unam.png" alt="unam">
+                        </span>
+                    </div>
+                    <div class="grupo2">
+                        <span>
+                            <img src="./assets/icons/wwf.png" alt="wwf">
+                        </span>
+                        <span>
+                            <img src="./assets/icons/edomex.png" alt="edomex">
+                        </span>
+                        <span>
+                            <img src="./assets/icons/logoProbosque.png" alt="logoProbosque">
+                        </span>
+                    </div>                    
+                </div>
+
                 <!-- Contenido del menú capas-->
                 <div class="capas-lista">
                     <div class="capas-lista-titulo">
@@ -82,21 +105,21 @@
                     <!-- Lista de capas -->
                     <div class="capas-lista-elemento">
                         <input type="checkbox" id="capa1" name="capa1" value="capa1" checked>
-                        <label for="capa1">Cobertura Arbórea 2022.<br>Edo. México.</label>
+                        <label for="capa1">Cobertura Vegetal 2022.<br>Edo. México.</label>
                         <span>
                             <img src="" alt="">
                         </span>
                     </div>
                     <div class="capas-lista-elemento">
                         <input type="checkbox" id="capa2" name="capa2" value="capa2">
-                        <label for="capa2">Cobertura Arbórea 2015.<br>Edo. México.</label>
+                        <label for="capa2">Cobertura Vegetal 2015.<br>Edo. México.</label>
                         <span>
                             <img src="" alt="">
                         </span>
                     </div>
                     <div class="capas-lista-elemento">
                         <input type="checkbox" id="capa3" name="capa3" value="capa3">
-                        <label for="capa3">Cambio Cobertura Arbórea 2015-2022.<br>Edo. México.</label>
+                        <label for="capa3">Cambio Cobertura Vegetal 2015-2022.<br>Edo. México.</label>
                         <span>
                             <img src="" alt="">
                         </span>
@@ -154,7 +177,7 @@
                     </div>  
                     <div class="capas-lista-elemento">
                         <input type="checkbox" id="capa1" name="capa1" value="capa1" checked>
-                        <label for="capa1">Cobertura Arbórea 2015</label>
+                        <label for="capa1">Cobertura Vegetal 2015</label>
                         <span>
                             <img src="" alt="">
                         </span>
@@ -169,9 +192,9 @@
                         <h1>Consulta.</h1>
                         <!-- Panel de seleccion de categoria de cobertura-->
                         <div id="busqueda" class="busqueda">
-                            <label for="categoria" id="categoria">Categoria 2022</label>
+                            <label for="categoria" id="categoria">Cobertura Vegetal 2022.</label>
                             <select id="cobertura">
-                                <option value="">Todos.</option>
+                                <option value="'TODOS'">Todos.</option>
                                 <option value="'CUERPO DE AGUA'">Cuerpo de agua.</option>
                                 <option value="'ASENTAMIENTO HUMANO'">Asentamiento humano.</option>
                                 <option value="'AGRICULTURA'">Agricultura.</option>
@@ -191,35 +214,12 @@
                     </div>
                 </div>
 
-                <!-- Seccion de logos-->
-                <div class="capas-lista-logos">
-                    <div class="grupo1">
-                        <span>
-                            <img src="./assets/icons/igg_logo.png" alt="igg_logo">
-                        </span>
-                        <span>
-                            <img src="./assets/icons/unam.png" alt="unam">
-                        </span>
-                    </div>
-                    <div class="grupo2">
-                        <span>
-                            <img src="./assets/icons/wwf.png" alt="wwf">
-                        </span>
-                        <span>
-                            <img src="./assets/icons/edomex.png" alt="edomex">
-                        </span>
-                        <span>
-                            <img src="./assets/icons/logoProbosque.png" alt="logoProbosque">
-                        </span>
-                    </div>                    
-                </div>
-
             </aside>
         </div>  
 
 
         <!-- Mapa Tiulo -->
-        <div id="mapa-titulo">WWF-IGG-PROBOSQUE Cambio Cobertura Arbórea 2015-2022.</div>
+        <div id="mapa-titulo">WWF-IGG-PROBOSQUE Cambio Cobertura Vegetal 2015-2022.</div>
         <!-- Simbologia -->
         <div id="mapa-simbologia">
             <!-- <img id="mapa-simbologia-img_1" src="./assets/icons/simbologia.png" alt="igg_simbologia"> -->

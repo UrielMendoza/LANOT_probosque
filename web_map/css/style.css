@@ -191,10 +191,10 @@ body {
     /* Tamaño vertical ajustado a la pantalla */
     height: 100vh;
     /* Añade scroll al menú */
-    overflow-y: auto;
+/*     overflow-y: auto; */
     /* Cambia el diseño del scroll */
-    scrollbar-width: thin;
-    scrollbar-color: var(--blue_probosque) var(--dark_font);
+/*     scrollbar-width: thin;
+    scrollbar-color: var(--blue_probosque) var(--dark_font); */
 }
 
 .menu {
@@ -210,6 +210,14 @@ body {
     opacity: 0.8;
     border-radius: 2rem;
     padding: 2rem;
+    /* Define un tamaño maximo para el menú vertical */
+    max-height: 35vh;
+    /* Añade scroll al menú */
+    overflow-y: auto;
+    /* Cambia el diseño del scroll */
+    scrollbar-width: thin;
+    scrollbar-color: var(--blue_probosque) var(--dark_font);
+
 }
 
 .capas-lista-titulo {
@@ -368,7 +376,7 @@ body {
 #mapa-simbologia img {
     opacity: 0;
     width: 300px;
-    height: 220px;
+    /* height: 220px; */
     margin-bottom: 10px;
 }
 
