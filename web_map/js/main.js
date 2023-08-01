@@ -252,7 +252,7 @@ window.addEventListener('DOMContentLoaded', function() {
         });
 
         var entidades = L.tileLayer.wms(wms, {
-            layers: 'probosque:entidades',
+            layers: 'probosque:entidades_probosque',
             transparent: true,
             format: 'image/png',
             // Siempre esta por encima de las demas
