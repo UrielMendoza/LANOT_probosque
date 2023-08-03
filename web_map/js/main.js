@@ -119,7 +119,7 @@ window.addEventListener('DOMContentLoaded', function() {
                     }
                 } else {
                     map.removeLayer(wmsLayer);
-                    mapaSimbologiaImg.style.opacity = '0';
+                    //mapaSimbologiaImg.style.opacity = '0';
                 }
             });
         }
