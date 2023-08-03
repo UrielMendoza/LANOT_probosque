@@ -273,12 +273,12 @@ window.addEventListener('DOMContentLoaded', function() {
         toggleLayer('capa7', planet_true_color);
         toggleLayer('capa8', planet_false_color);
         toggleLayer('capa9', planet_nir_color);
-/*         toggleLayer('capa7', spot_ndvi_2015); 
-        toggleLayer('capa8', planet_ndvi_2022);
-        toggleLayer('capa9', spot_planet_dndvi);
-        toggleLayer('capa10', spot_planet_dndvi_1sd);
-        toggleLayer('capa11', spot_planet_dndvi_2sd);
-        toggleLayer('capa12', spot_planet_dndvi_3sd); */
+        toggleLayer('capa10', planet_ndvi_2022);
+        toggleLayer('capa11', spot_ndvi_2015); 
+        toggleLayer('capa12', spot_planet_dndvi);
+        toggleLayer('capa13', spot_planet_dndvi_1sd);
+        toggleLayer('capa14', spot_planet_dndvi_2sd);
+        toggleLayer('capa15', spot_planet_dndvi_3sd);
 
 
         // Control de capas
