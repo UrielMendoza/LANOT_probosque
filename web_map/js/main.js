@@ -114,8 +114,20 @@ window.addEventListener('DOMContentLoaded', function() {
                         mapaSimbologiaImg.src = './assets/icons/simbologia_cambio.png';
                     } else if (checkboxId == 'capa4') {
                         mapaSimbologiaImg.src = './assets/icons/simbologia_vegdominante.png';
+                    } else if (checkboxId == 'capa10') {
+                        mapaSimbologiaImg.src = './assets/icons/simbologia_ndvi.png';
+                    } else if (checkboxId == 'capa11') {
+                        mapaSimbologiaImg.src = './assets/icons/simbologia_ndvi.png';
+                    } else if (checkboxId == 'capa12') {
+                        mapaSimbologiaImg.src = './assets/icons/simbologia_dndvi.png';
+                    } else if (checkboxId == 'capa13') {
+                        mapaSimbologiaImg.src = './assets/icons/simbologia_sd.png';
+                    } else if (checkboxId == 'capa14') {
+                        mapaSimbologiaImg.src = './assets/icons/simbologia_sd.png';
+                    } else if (checkboxId == 'capa15') {
+                        mapaSimbologiaImg.src = './assets/icons/simbologia_sd.png';
                     } else {
-                        mapaSimbologiaImg.src = '';
+                        mapaSimbologiaImg.src = './assets/icons/sin_simbologia.png ';
                     }
                 } else {
                     map.removeLayer(wmsLayer);
@@ -313,6 +325,9 @@ window.addEventListener('DOMContentLoaded', function() {
         
         // Crear el controlador de capas y agregarlo al mapa
         L.control.layers(baseMaps, overlays).addTo(map);
+
+        // Agrega geocoder
+        L.Control.geocoder().addTo(map);
 
         // Función para obtener información de la capa
         function getFeatureInfo(evt) {
