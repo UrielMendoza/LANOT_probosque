@@ -397,3 +397,67 @@ body {
     padding-top: 40%;
 
 }
+
+
+/* Estilos para celular */
+@media (max-width: 768px) {
+    .inicio {
+        /* Tamaño para celular */
+        width: 100vw;
+        height: 100vh;
+        /* Centra la imagen de fondo pars celular */
+        background: url("../assets/img/background.JPG") center / cover no-repeat;
+    }
+
+    .inicio-titulo {
+        /* Tamaño para celular */
+        width: 50vh;
+        height: 40vh;
+        /* Centra el titulo en la pantalla */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 0;
+        margin: 0;
+        top: 0;
+        border-radius: 0;
+    }
+
+    /* Cambia el tamaño de los titulos para celular */
+    .inicio-titulo h1 {
+        font-size: 18px;
+    }
+
+    .inicio-titulo h2 {
+        font-size: 14px;
+    }
+
+    .inicio-titulo h3 {
+        font-size: 16px;
+    }
+
+    .inicio-titulo h4 {
+        font-size: 10px;
+    }
+
+    .inicio-logos {
+        /* Tamaño para celular */
+        width: 100vw;
+        height: 40vh;
+        /* Centra los logos en la pantalla */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 0;
+        margin: 0;
+        top: 0;
+    }
+
+    .inicio-logos .grupo1 {
+        /* Reduce el tamaño de los logos */
+        width: 100vw;
+        height: 20vh;
+    }
+}

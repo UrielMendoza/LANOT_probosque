@@ -107,30 +107,43 @@ window.addEventListener('DOMContentLoaded', function() {
 
                     // Controlador de simbologia al activar la capa
                     if (checkboxId == 'capa1') {
+                        mapaSimbologia.style.opacity = '1';
                         mapaSimbologiaImg.src = './assets/icons/simbologia.png';
                     } else if (checkboxId == 'capa2') {
+                        mapaSimbologia.style.opacity = '1';
                         mapaSimbologiaImg.src = './assets/icons/simbologia.png';
                     } else if (checkboxId == 'capa3') {
+                        mapaSimbologia.style.opacity = '1';
                         mapaSimbologiaImg.src = './assets/icons/simbologia_cambio.png';
                     } else if (checkboxId == 'capa4') {
+                        mapaSimbologia.style.opacity = '1';
                         mapaSimbologiaImg.src = './assets/icons/simbologia_vegdominante.png';
                     } else if (checkboxId == 'capa10') {
+                        mapaSimbologia.style.opacity = '1';
                         mapaSimbologiaImg.src = './assets/icons/simbologia_ndvi.png';
                     } else if (checkboxId == 'capa11') {
+                        mapaSimbologia.style.opacity = '1';
                         mapaSimbologiaImg.src = './assets/icons/simbologia_ndvi.png';
                     } else if (checkboxId == 'capa12') {
+                        mapaSimbologia.style.opacity = '1';
                         mapaSimbologiaImg.src = './assets/icons/simbologia_dndvi.png';
                     } else if (checkboxId == 'capa13') {
+                        mapaSimbologia.style.opacity = '1';
                         mapaSimbologiaImg.src = './assets/icons/simbologia_sd.png';
                     } else if (checkboxId == 'capa14') {
+                        mapaSimbologia.style.opacity = '1';
                         mapaSimbologiaImg.src = './assets/icons/simbologia_sd.png';
                     } else if (checkboxId == 'capa15') {
+                        mapaSimbologia.style.opacity = '1';
                         mapaSimbologiaImg.src = './assets/icons/simbologia_sd.png';
                     } else {
                         mapaSimbologiaImg.src = './assets/icons/sin_simbologia.png ';
+                        // Esconde la simbologia
+                        mapaSimbologia.style.opacity = '0';
                     }
                 } else {
                     map.removeLayer(wmsLayer);
+                    mapaSimbologia.style.opacity = '0';
                     //mapaSimbologiaImg.style.opacity = '0';
                 }
             });
