@@ -202,6 +202,12 @@ body {
     /* Estilos del menú lateral */
 }
 
+/* Estilo para el botón de alternancia */
+.toggle-menu-button {
+    display: block; /* Muestra el botón en versión móvil */
+    margin: 10px auto; /* Ajusta el margen para centrar */
+}
+
 .capas-lista {
     /* Espaciado entre los divs */
     margin-bottom: 1rem;
@@ -455,9 +461,56 @@ body {
         top: 0;
     }
 
-    .inicio-logos .grupo1 {
-        /* Reduce el tamaño de los logos */
-        width: 100vw;
-        height: 20vh;
+    .inicio-logos span {
+        /* Tamaño para celular */
+        width: 80px;
+        height: 80px;
     }
+
+    .inicio-logos img {
+        /* Tamaño para celular */
+        width: 50px;
+        height: 50px;
+    }
+
+    .inicio-boton {
+        /* Tamaño para celular */
+        width: 100vw;
+        height: 5vh;
+        /* Centra el boton en la pantalla */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 0;
+        margin: 0;
+        top: 0;
+    }
+
+    .inicio-boton button {
+        /* Tamaño para celular */
+        width: 30vw;
+        height: 5vh;
+        font-size: 20px;
+    }
+
+    .menu-container {
+        display: none;
+        /* Tamaño para celular */
+        width: 100vw;
+        height: 100vh;
+        /* Centra el menu en la pantalla */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 0;
+        margin: 0;
+        top: 0;
+        border-radius: 0;
+        /* Añade trasparencia solo al color de fondo */
+        background: var(--dark_font);
+    }
+
+
 }
