@@ -24,19 +24,6 @@ window.addEventListener('DOMContentLoaded', function() {
     setTimeout(function() {
         btnInicio.style.opacity = '1';
     }, 1000);
-
-    // Boton de menu
-    const toggleMenuBtn = document.getElementById("toggleMenuBtn");
-
-    toggleMenuBtn.addEventListener("click", function () {
-        if (menu.style.display === "none" || menu.style.display === "") {
-            menu.style.display = "block";
-            toggleMenuBtn.textContent = "Ocultar Menú";
-        } else {
-            menu.style.display = "none";
-            toggleMenuBtn.textContent = "Mostrar Menú";
-        }
-    });
     
 
     // Manejar el evento clic en el botón de inicio
