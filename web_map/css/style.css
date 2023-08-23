@@ -398,6 +398,15 @@ body {
 
 }
 
+/* Estilo para mostrar el menú cuando se haga clic en el botón */
+.show-menu .menu-container {
+    display: block;
+}
+
+.hide-button .toggle-menu-button {
+    display: none;
+}
+
 /* Estilos para celular */
 @media (max-width: 768px) {
     .inicio {
@@ -492,5 +501,25 @@ body {
         height: 5vh;
         font-size: 20px;
     }
+
+    /* Estilo menu movil */
+    .menu-container {
+        display: none;
+    }
+    .toggle-menu-button {
+        display: block;
+        margin: 10px auto;
+        /* Estilo toogle de menu app */
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: var(--blue_probosque);
+        /* Elimina el borde del boton */
+        border: none;
+        /* Añade sombra al boton */
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+        
+    }
+
 
 }

@@ -36,6 +36,18 @@ window.addEventListener('DOMContentLoaded', function() {
         //mapaSimbologiaImg_1.style.opacity = '1';
         //mapaSimbologiaImg_2.style.opacity = '0.85';
 
+        // Menu responsivo
+        const toggleMenuButton = document.getElementById("toggleMenuButton");
+        const menuContainer = document.getElementById("menu-container");
+        toggleMenuButton.addEventListener("click", function () {
+            menuContainer.style.display = "block";
+            toggleMenuButton.classList.toggle("hide-button");
+            // Si vuelven a dar clic en el botón, se oculta el menú
+            if (toggleMenuButton.classList.contains("hide-button")) {
+                menuContainer.style.display = "none";
+            }S
+        });
+
         // Activa la simbologia de la capa 1
         mapaSimbologiaImg.src = './assets/icons/simbologia.png';
 
