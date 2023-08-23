@@ -398,7 +398,6 @@ body {
 
 }
 
-
 /* Estilos para celular */
 @media (max-width: 768px) {
     .inicio {
@@ -460,4 +459,38 @@ body {
         width: 100vw;
         height: 20vh;
     }
+
+    .inicio-logos span {
+        /* Tamaño para celular */
+        width: 80px;
+        height: 80px;
+    }
+
+    .inicio-logos img {
+        /* Tamaño para celular */
+        width: 50px;
+        height: 50px;
+    }
+
+    .inicio-boton {
+        /* Tamaño para celular */
+        width: 100vw;
+        height: 5vh;
+        /* Centra el boton en la pantalla */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 0;
+        margin: 0;
+        top: 0;
+    }
+
+    .inicio-boton button {
+        /* Tamaño para celular */
+        width: 30vw;
+        height: 5vh;
+        font-size: 20px;
+    }
+
 }
