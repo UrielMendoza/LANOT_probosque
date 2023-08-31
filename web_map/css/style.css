@@ -398,6 +398,11 @@ body {
 
 }
 
+/* Estilo del boton de menu */
+.toggle-menu-button {
+    display: none;    
+}
+
 /* Estilo para mostrar el menú cuando se haga clic en el botón */
 .show-menu .menu-container {
     display: block;
@@ -506,20 +511,67 @@ body {
     .menu-container {
         display: none;
     }
+
     .toggle-menu-button {
-        display: block;
-        margin: 10px auto;
+        display: none;
         /* Estilo toogle de menu app */
         width: 50px;
         height: 50px;
-        border-radius: 50%;
-        background: var(--blue_probosque);
         /* Elimina el borde del boton */
-        border: none;
-        /* Añade sombra al boton */
-        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-        
+        border: none;        
     }
+
+    .toggle-menu-button img {
+        width: 50px;
+        height: 50px;
+        /*Pone el boton por encima del mapa */
+        position: absolute;
+        top: 90px;
+        left: 10px;
+        z-index: 1000;
+    }
+
+    .toggle-menu-button2 {
+        display: none;        
+    }
+
+    .toggle-menu-button2 img {
+        width: 50px;
+        height: 50px;
+        /*Pone el boton por encima del mapa */
+        position: absolute;
+        bottom: 0px;
+        right: 20px;
+        z-index: 1000;
+    }
+
+
+    /* Cambia el tamaño del titulo del mapa para celular */
+    #mapa-titulo {
+        font-size: 8px;
+        left: 30%;
+        width: 25vh;
+        /* Cntra el titulo en la pantalla */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 0;
+        margin: 0;
+    }
+
+    /* Pone la simbologia al principio para celular */
+    #mapa-simbologia {
+        opacity: 1;
+        display: block;
+    }
+
+    /* Cambia el tamaño de la simbología para celular */
+/*     #mapa-simbologia img {
+        opacity: 0;
+        width: 240px;
+        height: 180px;
+    } */
 
 
 }

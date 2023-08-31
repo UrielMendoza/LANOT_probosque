@@ -14,6 +14,11 @@ window.addEventListener('DOMContentLoaded', function() {
     //var mapaSimbologiaImg_1 = document.getElementById('mapa-simbologia-img_1');
     //var mapaSimbologiaImg_2 = document.getElementById('mapa-simbologia-img_2');
     var mapaSimbologiaImg = document.getElementById('mapa-simbologia-img');
+    const toggleMenuButton = document.getElementById("toggleMenuButton");
+    const toggleMenuButtonImg = document.getElementById("toggleMenuButtonImg");
+    const toggleMenuButton2 = document.getElementById("toggleMenuButton2");
+    const toggleMenuButtonImg2 = document.getElementById("toggleMenuButtonImg2");
+    const menuContainer = document.getElementById("menu-container");
 
     // Mostrar el título y los logos después de 1 segundo
     setTimeout(function() {
@@ -24,8 +29,14 @@ window.addEventListener('DOMContentLoaded', function() {
     setTimeout(function() {
         btnInicio.style.opacity = '1';
     }, 1000);
-    
 
+    // Esconde el menú al inicio
+    menuContainer.style.display = "none";
+    // Esconde el titulo
+    mapaTitulo.style.opacity = '0';
+    // Esconde la simbologia
+    mapaSimbologia.style.opacity = '0';
+    
     // Manejar el evento clic en el botón de inicio
     document.getElementById('btn-inicio').addEventListener('click', function() {
         inicio.style.display = 'none';
@@ -36,16 +47,35 @@ window.addEventListener('DOMContentLoaded', function() {
         //mapaSimbologiaImg_1.style.opacity = '1';
         //mapaSimbologiaImg_2.style.opacity = '0.85';
 
+        // Muestra el botón de toggleMenuButton
+        toggleMenuButton.classList.toggle("hide-button");
+        toggleMenuButton.style.display = "block";
+
         // Menu responsivo
-        const toggleMenuButton = document.getElementById("toggleMenuButton");
-        const menuContainer = document.getElementById("menu-container");
         toggleMenuButton.addEventListener("click", function () {
             menuContainer.style.display = "block";
             toggleMenuButton.classList.toggle("hide-button");
-            // Si vuelven a dar clic en el botón, se oculta el menú
-            if (toggleMenuButton.classList.contains("hide-button")) {
-                menuContainer.style.display = "none";
-            }S
+            // Oculta el titulo
+            mapaTitulo.style.opacity = '0';
+            // Oculta la simbologia
+            mapaSimbologia.style.display = 'none';
+
+            // Pone la imagen de toggleMenuButton por encima del menu
+            toggleMenuButtonImg.style.zIndex = '1000';
+
+            // Muestra el boton de cierre
+            toggleMenuButton2.classList.toggle("hide-button");
+            toggleMenuButton2.style.display = "block";
+        });
+
+        // Boton de cierre
+        toggleMenuButton2.addEventListener("click", function () {
+            menuContainer.style.display = "none";
+            toggleMenuButton2.classList.toggle("hide-button");
+            // Muestra el titulo
+            mapaTitulo.style.opacity = '0.75';
+            // Muestra la simbologia
+            mapaSimbologia.style.display = 'block';
         });
 
         // Activa la simbologia de la capa 1
@@ -389,6 +419,13 @@ window.addEventListener('DOMContentLoaded', function() {
 
         // Añadir un control de escala
         L.control.scale().addTo(map);
+
+        // Cambia el nivel de zoom en la version movil
+        if (window.innerWidth < 768) {
+            map.setZoom(7.5);
+            mapaSimbologia.style.opacity = '1';
+        }
+
 
         
     });
