@@ -98,9 +98,17 @@ window.addEventListener('DOMContentLoaded', function() {
 
         // Inicializar el mapa
         // Mapa
-        const map = L.map('map', {
-        }).setView([19.3, -99.5], 9);
-        
+        // Cambia el nivel de zoom en la version movil
+        if (window.innerWidth < 768) {
+            var map = L.map('map', {
+            }).setView([19.1, -99.6], 9);
+        }
+         // version de escritorio
+        if (window.innerWidth > 768) {
+            var map = L.map('map', {
+            }).setView([19.3, -99], 9);
+        }       
+
         // Tiles hasta detras de las capas
         const cartodb = L.tileLayer('https://cartodb-basemaps-a.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png', {
             maxZoom: 19,
@@ -428,13 +436,22 @@ window.addEventListener('DOMContentLoaded', function() {
 
         // Cambia el nivel de zoom en la version movil
         if (window.innerWidth < 768) {
-            map.setZoom(7.5);
+            map.setZoom(7.8);
+            // Cambia las coordenadas de inicio en la version movil
+            map.panTo(new L.LatLng(19.3, -95));
             mapaSimbologia.style.opacity = '1';
         }
 
-        // Si es version de escritorio, elimina la imagen de toggleMenuButton
         if (window.innerWidth > 768) {
+            // Si es version de escritorio, elimina la imagen de toggleMenuButton
             toggleMenuButtonImg.style.display = "none";
+            // Elimina el boton de cierre
+            toggleMenuButton2.style.display = "none";
+            // Muestra el menu
+            menuContainer.style.display = "block";
+            // Muestra la simbologia
+            mapaSimbologia.style.opacity = '1';
+            
         }   
 
         
