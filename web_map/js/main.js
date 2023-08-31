@@ -432,6 +432,10 @@ window.addEventListener('DOMContentLoaded', function() {
             mapaSimbologia.style.opacity = '1';
         }
 
+        // Si es version de escritorio, elimina la imagen de toggleMenuButton
+        if (window.innerWidth > 768) {
+            toggleMenuButtonImg.style.display = "none";
+        }   
 
         
     });
