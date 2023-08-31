@@ -541,7 +541,7 @@ body {
         /*Pone el boton por encima del mapa */
         position: absolute;
         bottom: 0px;
-        right: 20px;
+        left: 20px;
         z-index: 1000;
     }
 

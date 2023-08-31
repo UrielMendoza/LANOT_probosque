@@ -66,6 +66,9 @@ window.addEventListener('DOMContentLoaded', function() {
             // Muestra el boton de cierre
             toggleMenuButton2.classList.toggle("hide-button");
             toggleMenuButton2.style.display = "block";
+
+            // Esconde el boton de toggleMenuButton
+            toggleMenuButton.style.display = "none";
         });
 
         // Boton de cierre
@@ -76,6 +79,9 @@ window.addEventListener('DOMContentLoaded', function() {
             mapaTitulo.style.opacity = '0.75';
             // Muestra la simbologia
             mapaSimbologia.style.display = 'block';
+
+            // Muestra el boton de toggleMenuButton
+            toggleMenuButton.style.display = "block";
         });
 
         // Activa la simbologia de la capa 1
