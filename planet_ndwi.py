@@ -13,7 +13,7 @@ print(lines)
 
 for line in lines:
     #filesMeta = glob(line+'/'+'*.xml')
-    files = glob(line+'/'+'*AnalyticMS_8b.tif')
+    files = glob(line+'/'+'*8b_harmonized.tif')
     #filesMeta.sort()
     files.sort()
     for file in files:
