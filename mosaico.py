@@ -47,7 +47,7 @@ pathInputDeltaClass = '/data/output/probosque/delta_class_ndvi/'
 
 pathOutput = '/datawork/planet/acapulco/mosaicos/'
 
-createMosaic(pathInputPlanet,'planet_ndwi_acapulco_20230819',pathOutput)
+createMosaic(pathInputPlanet,'planet_ndwi_acapulco_20231029',pathOutput)
 #createMosaic(pathInputSpot,'spot_ndvi_2015',pathOutput)
 #createMosaic(pathInputDelta,'spot_planet_dndvi',pathOutput)
 #createMosaicClass(pathInputDeltaClass,'spot_planet_dndvi_1sd','1sd',pathOutput)
