@@ -4,8 +4,8 @@ import numpy as np
 from xml.dom import minidom
 import os
 
-pathInputPlanet = '/data/input/probosque/PLANET2022/'
-pathOutput = '/data/output/probosque/planet_ndvi/'
+pathInputPlanet = '/datawork/planet/acapulco/Acapulco_20231029_psscene_analytic_8b_udm2/PSScene'
+pathOutput = '/datawork/planet/acapulco/ndwi'
 
 lines = glob(pathInputPlanet+'*')
 
@@ -26,11 +26,11 @@ for line in lines:
         #refleSF_b6 = float(meta.getElementsByTagName('ps:reflectanceCoefficient')[5].firstChild.data)
         #refleSF_b8 = float(meta.getElementsByTagName('ps:reflectanceCoefficient')[7].firstChild.data)
         ds = rasterio.open(file)
-        b6 = ds.read(6) * 0.01
+        b4 = ds.read(6) * 0.01
         b8 = ds.read(8) * 0.01
-        ndvi = (b8 - b6) / (b8 + b6)
+        ndwi = (b4 - b8) / (b4 + b8)
 
-        print(ndvi)
+        print(ndwi)
         print(ds.width, ds.height)
         print(ds.bounds)
         print(type(ds.bounds))
@@ -43,10 +43,10 @@ for line in lines:
 
         lineDir = line.split('/')[-1]
         os.system('mkdir '+pathOutput+lineDir) 
-        name = file.split('/')[-1].split('.')[0]+'_planet_ndvi.tif'
+        name = file.split('/')[-1].split('.')[0]+'_planet_ndwi.tif'
 
         with rasterio.open(os.path.join(pathOutput+lineDir, name), 'w', **kwargs) as dst:
-            dst.write_band(1, ndvi.astype(rasterio.float32))
+            dst.write_band(1, ndwi.astype(rasterio.float32))
 
 
 
