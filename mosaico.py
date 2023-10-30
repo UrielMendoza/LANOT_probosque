@@ -40,14 +40,14 @@ def createMosaicClass(pathInput,nombre,sd,pathOutput):
     os.system('gdal_translate -CO "TILED=YES" -CO "BLOCKXSIZE=512" -CO "BLOCKYSIZE=512" -CO "BIGTIFF=YES" '+pathOutput+nombre+'_tmp.tif '+nomMosaicTif)
     os.system('gdaladdo -r average '+nomMosaicTif+' 2 4 8 16 32')
 
-pathInputPlanet = '/datawork/planet/acapulco/ndwi_20230819/'
+pathInputPlanet = '/datawork/planet/acapulco/ndwi_20231029/'
 pathInputSpot = '/data/output/probosque/spot_ndvi/'
 pathInputDelta = '/data/output/probosque/delta_ndvi/'
 pathInputDeltaClass = '/data/output/probosque/delta_class_ndvi/'
 
 pathOutput = '/datawork/planet/acapulco/mosaicos/'
 
-createMosaic(pathInputPlanet,'planet_ndwi_acapulco_20230819',pathOutput)
+createMosaic(pathInputPlanet,'planet_ndwi_acapulco_20231029',pathOutput)
 #createMosaic(pathInputSpot,'spot_ndvi_2015',pathOutput)
 #createMosaic(pathInputDelta,'spot_planet_dndvi',pathOutput)
 #createMosaicClass(pathInputDeltaClass,'spot_planet_dndvi_1sd','1sd',pathOutput)
