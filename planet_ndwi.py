@@ -4,7 +4,7 @@ import numpy as np
 from xml.dom import minidom
 import os
 
-pathInputPlanet = '/datawork/planet/acapulco/Acapulco_20231029_psscene_analytic_8b_udm2/'
+pathInputPlanet = '/datawork/planet/acapulco/acapulco_20230819_psscene_analytic_8b_sr_udm2/'
 pathOutput = '/datawork/planet/acapulco/ndwi/'
 
 lines = glob(pathInputPlanet+'*')
